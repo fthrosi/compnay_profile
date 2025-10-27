@@ -4,6 +4,54 @@
   --background: #ffffff;
   --foreground: #171717;
 }
+@theme {
+  --color-primary: #1E40AF;
+  --color-neutral-black: #1e1f2a;
+  --color-neutral-grey: #9b9ca6;
+  --color-light-primary: #e0e8f8;
+  --color-neutral-white: #FEFEFE;
+
+  --font-montserrat: var(--font-montserrat);
+
+  --text-h1: 50px;
+  --text-h2: 40px;
+  --text-h3: 32px;
+  --text-h4: 26px;
+  --text-h5: 20px;
+  --text-h6: 16px;
+  --text-body-l: 16px;
+  --text-body-m: 14px;
+  --text-button: 16px;
+  --text-caption: 12px;
+
+  --weight-regular: 400;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+}
+
+@layer utilities {
+  .container-layout {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-sizing: border-box;
+  }
+  @media (min-width: 768px) {
+    .container-layout {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .container-layout {
+      max-width: 1440px;
+      padding-left: 70px;
+      padding-right: 70px;
+    }
+  }
+}
 
 @theme inline {
   --color-background: var(--background);
