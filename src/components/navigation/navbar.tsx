@@ -74,7 +74,7 @@ export default function Navbar() {
           ))}
           <Link
             href="/contact"
-            className={`flex ${pathname === '/contact' ? "bg-primary font-semibold text-neutral-white" : "text-neutral-black"} font-montserrat text-body-m px-4 py-2.5 rounded-[0.625rem] gap-1 items-center justify-center`}
+            className={`flex font-montserrat ${pathname === '/contact' ? "bg-primary font-semibold text-neutral-white" : "text-neutral-black"} font-montserrat text-body-m px-4 py-2.5 rounded-[0.625rem] gap-1 items-center justify-center`}
             onClick={() => setIsMenuOpen(false)}
           >
             Contact Us
