@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { navigationLinks } from "@/const/navigation";
@@ -7,11 +8,14 @@ import RightArrow from "@/icons/right-arrow";
 import BurgerIcon from "@/icons/burger-icon";
 import XIcon from "@/icons/x-icon";
 import { useState } from "react";
+
 export default function Navbar() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <div className="w-full fixed top-0 left-0 z-50 bg-neutral-white">
+      {/* Navbar utama */}
       <div className="container-layout flex items-center justify-between md:h-[7.438rem] h-20">
         <Image
           src="/images/logo-new.svg"
@@ -20,6 +24,8 @@ export default function Navbar() {
           height={44.4}
           className="w-30 sm:w-34 md:w-37 lg:w-49 h-auto"
         />
+
+        {/* Navigation links desktop */}
         <div className="md:flex lg:gap-4 hidden">
           {navigationLinks.map((link) => (
             <div
@@ -34,13 +40,17 @@ export default function Navbar() {
             </div>
           ))}
         </div>
+
+        {/* Tombol Contact Us (desktop) */}
         <Link
           href="/contact"
-          className="hidden md:flex bg-primary text-neutral-white font-montserrat lg:text-button md:text-body-m font-bold lg:px-4 lg:py-2.5 md:py-2 md:px-3.5 rounded-[0.625rem]  gap-1 items-center"
+          className="hidden md:flex bg-primary text-neutral-white font-montserrat lg:text-button md:text-body-m font-bold lg:px-4 lg:py-2.5 md:py-2 md:px-3.5 rounded-[0.625rem] gap-1 items-center"
         >
           Contact Us
           <RightArrow className="lg:size-7 md:size-6" />
         </Link>
+
+        {/* Tombol burger (mobile) */}
         <div className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {isMenuOpen ? (
             <XIcon className="size-6 text-primary" />
@@ -49,6 +59,8 @@ export default function Navbar() {
           )}
         </div>
       </div>
+
+      {/* Menu mobile */}
       <div
         className={`
           md:hidden fixed w-full bg-neutral-white shadow-lg z-40 p-4
@@ -80,14 +92,15 @@ export default function Navbar() {
               </Link>
             </div>
           ))}
+
+          {/* Contact Us (mobile) */}
           <Link
             href="/contact"
-            className={`flex ${
+            className={`flex font-montserrat text-body-m px-4 py-2.5 rounded-[0.625rem] gap-1 items-center justify-center ${
               pathname === "/contact"
                 ? "bg-primary font-semibold text-neutral-white"
                 : "text-neutral-black"
-            } font-montserrat text-body-m px-4 py-2.5 rounded-[0.625rem] gap-1 items-center justify-center`}
-            className={`flex font-montserrat ${pathname === '/contact' ? "bg-primary font-semibold text-neutral-white" : "text-neutral-black"} font-montserrat text-body-m px-4 py-2.5 rounded-[0.625rem] gap-1 items-center justify-center`}
+            }`}
             onClick={() => setIsMenuOpen(false)}
           >
             Contact Us
