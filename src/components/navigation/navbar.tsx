@@ -11,50 +11,54 @@ export default function Navbar() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
-      <div className="w-full fixed top-0 left-0 z-50 bg-neutral-white">
-        <div className="container-layout flex items-center justify-between md:h-[7.438rem] h-20">
-          <Image
-            src="/images/logo-new.svg"
-            alt="Logo"
-            width={196}
-            height={44.4}
-            className="w-30 sm:w-34 md:w-37 lg:w-49 h-auto"
-          />
-          <div className="md:flex lg:gap-4 hidden">
-            {navigationLinks.map((link) => (
-              <div
-                key={link.title}
-                className={`lg:py-2.5 lg:px-4 md:py-2 md:px-3.5 font-montserrat lg:text-body-l md:text-body-m ${
-                  pathname === link.href
-                    ? "bg-primary rounded-[0.625rem] font-semibold text-neutral-white"
-                    : "text-neutral-black"
-                }`}
-              >
-                <Link href={link.href}>{link.title}</Link>
-              </div>
-            ))}
-          </div>
-          <Link
-            href="/contact"
-            className="hidden md:flex bg-primary text-neutral-white font-montserrat lg:text-button md:text-body-m font-bold lg:px-4 lg:py-2.5 md:py-2 md:px-3.5 rounded-[0.625rem]  gap-1 items-center"
-          >
-            Contact Us
-            <RightArrow className="lg:size-7 md:size-6" />
-          </Link>
-          <div className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            {isMenuOpen ? (
-              <XIcon className="size-6 text-primary" />
-            ) : (
-              <BurgerIcon className="size-6 text-primary" />
-            )}
-          </div>
+    <div className="w-full fixed top-0 left-0 z-50 bg-neutral-white">
+      <div className="container-layout flex items-center justify-between md:h-[7.438rem] h-20">
+        <Image
+          src="/images/logo-new.svg"
+          alt="Logo"
+          width={196}
+          height={44.4}
+          className="w-30 sm:w-34 md:w-37 lg:w-49 h-auto"
+        />
+        <div className="md:flex lg:gap-4 hidden">
+          {navigationLinks.map((link) => (
+            <div
+              key={link.title}
+              className={`lg:py-2.5 lg:px-4 md:py-2 md:px-3.5 font-montserrat lg:text-body-l md:text-body-m ${
+                pathname === link.href
+                  ? "bg-primary rounded-[0.625rem] font-semibold text-neutral-white"
+                  : "text-neutral-black"
+              }`}
+            >
+              <Link href={link.href}>{link.title}</Link>
+            </div>
+          ))}
         </div>
-       <div
+        <Link
+          href="/contact"
+          className="hidden md:flex bg-primary text-neutral-white font-montserrat lg:text-button md:text-body-m font-bold lg:px-4 lg:py-2.5 md:py-2 md:px-3.5 rounded-[0.625rem]  gap-1 items-center"
+        >
+          Contact Us
+          <RightArrow className="lg:size-7 md:size-6" />
+        </Link>
+        <div className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          {isMenuOpen ? (
+            <XIcon className="size-6 text-primary" />
+          ) : (
+            <BurgerIcon className="size-6 text-primary" />
+          )}
+        </div>
+      </div>
+      <div
         className={`
           md:hidden fixed w-full bg-neutral-white shadow-lg z-40 p-4
           transition-all duration-300 ease-in-out
           top-20 h-full flex flex-col justify-center
-          ${isMenuOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0 pointer-events-none'}
+          ${
+            isMenuOpen
+              ? "translate-x-0 opacity-100"
+              : "-translate-x-full opacity-0 pointer-events-none"
+          }
         `}
       >
         <div className="container-layout flex flex-col gap-8">
@@ -67,20 +71,28 @@ export default function Navbar() {
                   : "text-neutral-black"
               }`}
             >
-              <Link href={link.href} className="block" onClick={() => setIsMenuOpen(false)}>
+              <Link
+                href={link.href}
+                className="block"
+                onClick={() => setIsMenuOpen(false)}
+              >
                 {link.title}
               </Link>
             </div>
           ))}
           <Link
             href="/contact"
-            className={`flex ${pathname === '/contact' ? "bg-primary font-semibold text-neutral-white" : "text-neutral-black"} font-montserrat text-body-m px-4 py-2.5 rounded-[0.625rem] gap-1 items-center justify-center`}
+            className={`flex ${
+              pathname === "/contact"
+                ? "bg-primary font-semibold text-neutral-white"
+                : "text-neutral-black"
+            } font-montserrat text-body-m px-4 py-2.5 rounded-[0.625rem] gap-1 items-center justify-center`}
             onClick={() => setIsMenuOpen(false)}
           >
             Contact Us
           </Link>
         </div>
       </div>
-      </div>
+    </div>
   );
 }
