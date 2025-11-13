@@ -5,7 +5,11 @@
   --foreground: #171717;
 }
 @theme {
+
   --color-primary: #1e40af;
+  --color-primary: #1E40AF;
+  --color-primary-dark: #091865;
+
   --color-neutral-black: #1e1f2a;
   --color-neutral-grey: #9b9ca6;
   --color-light-primary: #e0e8f8;
@@ -36,6 +40,7 @@
     padding-left: 20px;
     padding-right: 20px;
     box-sizing: border-box;
+    width: 100%;
   }
   @media (min-width: 768px) {
     .container-layout {
