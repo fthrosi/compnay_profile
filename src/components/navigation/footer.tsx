@@ -27,12 +27,12 @@ export default function Footer() {
             <div className="flex gap-3">
               <EmailIcon className="lg:size-5 size-4 text-neutral-white shrink-0" />
               <p className="lg:text-body-m text-caption">
-                talentadigitalsolution@gmail.com
+                talentadigis@gmail.com
               </p>
             </div>
             <div className="flex gap-3">
               <TeleponIcon className="lg:size-5 size-4 text-neutral-white shrink-0" />
-              <p className="lg:text-body-m text-caption">+62 812-3456-7890</p>
+              <p className="lg:text-body-m text-caption">+62 858-6988-7731</p>
             </div>
             <div className="flex gap-3">
               <LocationIcon className="lg:size-5 size-4 text-neutral-white shrink-0" />

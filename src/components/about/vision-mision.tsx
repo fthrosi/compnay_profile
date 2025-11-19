@@ -18,12 +18,14 @@ export default function VisionMision() {
           </div>
           <div>
             <p className="font-montserrat xl:text-body-l text-caption md:text-body-m text-neutral-black">
-              Transforming the technological landscape by providing exceptional
-              application and web services. Talenta Digital Solutions is
-              committed to helping businesses achieve their goals and stay ahead
-              of the competition by providing innovative, reliable, and
-              user-friendly solutions that continuously evolve according to
-              client needs.
+              PT Talenta Digial Solution aspires to become an Indonesian
+              creative technology company capable of standing on par with global
+              players. Our focus is not only on developing web applications and
+              services, but also on creating high-quality, innovative, and
+              relevant game products that meet the needs of modern society.
+              Through continuous innovation, we aim to provide beneficial
+              digital solutions while becoming a trusted partner for
+              international businesses.
             </p>
           </div>
         </div>
@@ -60,11 +62,17 @@ export default function VisionMision() {
           </div>
           <div>
             <p className="font-montserrat xl:text-body-l text-caption md:text-body-m text-neutral-black">
-              Our vision is to be a leading provider of application and web
-              services known for our expertise and commitment in delivering the
-              best results for clients. We strive to continuously innovate and
-              improve our services to remain competitive in the market and
-              become a trusted partner for businesses everywhere.
+              Develop innovative, reliable, and easy-to-use web applications and
+              services to help businesses achieve their goals and remain
+              competitive in the global marketplace. Create games that serve not
+              only as entertainment but also provide educational value,
+              introduce Indonesian culture, and foster a sense of pride in
+              national identity. Foster a healthy, collaborative, and inclusive
+              work culture by providing opportunities for every individual to
+              develop and demonstrate their contribution. Conduct business
+              responsibly, with attention to environmental sustainability and
+              community well-being, so that the technology we develop is not
+              only economically beneficial but also socially beneficial.
             </p>
           </div>
         </div>
