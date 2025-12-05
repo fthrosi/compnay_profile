@@ -3,4 +3,5 @@ export type TeamMember = {
     name: string;
     foto: string;
     jabatan: string;
+    jabatanId: number;
 };

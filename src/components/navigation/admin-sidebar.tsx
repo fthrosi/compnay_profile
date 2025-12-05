@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { LayoutDashboard, FileText, Briefcase } from "lucide-react"
+import { LayoutDashboard, FileText, Briefcase, Users } from "lucide-react"
 
 interface SidebarProps {
   isOpen: boolean
@@ -28,6 +28,11 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
       href: "/admin/portfolios",
       icon: Briefcase,
     },
+    {
+      label: "Manajemen Tim",
+      href: "/admin/teams",
+      icon: Users,
+    }
   ]
 
   const isActive = (href: string) => pathname === href
@@ -62,7 +67,8 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
             const Icon = item.icon
             const active = isActive(item.href)
 
-            return (              <Link
+            return (             
+            <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => onToggle()}

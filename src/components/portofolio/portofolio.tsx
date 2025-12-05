@@ -1,19 +1,43 @@
 "use client";
 import { portofolioType } from "@/types/portofolio.type";
 import { portfolioNavigation } from "@/const/navigation";
-import { portofolioData } from "@/const/portofolio";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Download } from "@/icons/download";
 import WhatsAppIcon from "@/icons/whatsapp";
+import PortfolioDetailModal from "./detailModal";
+import { useUIStore } from "@/store/useUiStore";
+
+
 export default function PortfolioList() {
+  const [portofolioData, setPortofolioData] = useState<portofolioType[]>([]);
   const [showData, setShowData] = useState<portofolioType[]>([]);
   const [itemsToShow, setItemsToShow] = useState<number>(6);
   const [typeFilter, setTypeFilter] = useState<string>("All");
+  const [selectedPortfolio, setSelectedPortfolio] = useState<portofolioType | null>(null);
+  const isModalDetail = useUIStore((state) => state.activeModal === "detailPortfolio");
+  const open = useUIStore((state) => state.open);
+  const getPortofolioData = async (): Promise<portofolioType[] | undefined> => {
+    try {
+      const response = await fetch("/api/portfolio", {
+        method: "GET",
+      });
+      const result = await response.json();
+      if (result.success) {
+        console.log("✅ Portfolios fetched:", result.data);
+        setPortofolioData(result.data);
+      } else {
+        setPortofolioData([]);
+      }
+    } catch (error) {
+      console.error("Error fetching portfolios:", error);
+      return [];
+    }
+  };
   const filterData = () => {
     let data = portofolioData.slice(0, itemsToShow);
     if (typeFilter !== "All") {
-      data = data.filter((item) => item.type === typeFilter);
+      data = data.filter((item) => item.category.name === typeFilter);
     }
     setShowData(data);
   };
@@ -27,6 +51,13 @@ export default function PortfolioList() {
   useEffect(() => {
     filterData();
   }, [itemsToShow, typeFilter]);
+  useEffect(() => {
+    getPortofolioData();
+  }, []);
+  const openDetailModal = (portfolio: portofolioType) => {
+    setSelectedPortfolio(portfolio);
+    open("detailPortfolio");
+  }
   return (
     <div className="container-layout flex flex-col gap-40 mb-40">
       <div className="flex flex-col items-center gap-16">
@@ -51,14 +82,15 @@ export default function PortfolioList() {
           ))}
         </div>
         <div className="grid lg:grid-cols-3 grid-cols-1 sm:grid-cols-2 gap-6.5">
-          {showData.map((item) => (
+          {portofolioData.map((item) => (
             <div
               className="p-5.5 flex flex-col gap-8 rounded-3xl border border-[#CACAD1]"
               key={item.id}
+              onClick={() => openDetailModal(item)}
             >
               <Image
-                src={item.image}
-                alt={item.title}
+                src={item.thumbnail_url}
+                alt={item.name}
                 width={372}
                 height={220}
                 className="w-full h-auto rounded-[1.25rem]"
@@ -66,37 +98,37 @@ export default function PortfolioList() {
               <div className="flex flex-col gap-6 ">
                 <div className="flex justify-between items-center text-caption text-neutral-black">
                   <div className="p-2.5 bg-neutral-300 rounded-[0.625rem] font-montserrat">
-                    <p>{item.type}</p>
+                    <p>{item.category.name}</p>
                   </div>
-                  <p className="font-montserrat">{item.year}</p>
+                  <p className="font-montserrat">{item.created_at.split("T")[0]}</p>
                 </div>
-                <h5 className="lg:text-h5 text-body-m md:text-body-l font-bold font-montserrat text-neutral-black">
-                  {item.title}
+                <h5 className="capitalize lg:text-h5 text-body-m md:text-body-l font-bold font-montserrat text-neutral-black">
+                  {item.name}
                 </h5>
-                <p className="lg:text-body-m text-caption text-neutral-black font-montserrat">
+                <p className="lg:text-body-m text-caption text-neutral-black font-montserrat line-clamp-3">
                   {item.description}
                 </p>
                 <div className="flex gap-2.5">
-                  {item.techStack.slice(0, 2).map((tech, index) => (
+                  {item.portfolio_techstack.slice(0, 2).map((tech, index) => (
                     <div
                       className="py-1 px-2.5 rounded-[0.625rem] border border-[#F7AE2D]"
                       key={index}
                     >
                       <p className="text-caption text-[#F7AE2D] font-montserrat">
-                        {tech.name}
+                        {tech.techstack.name}
                       </p>
                     </div>
                   ))}
-                  {item.techStack.length > 2 && (
+                  {item.portfolio_techstack.length > 2 && (
                     <div className="py-1 px-2.5 rounded-[0.625rem] border border-[#F7AE2D]">
                       <p className="text-caption text-[#F7AE2D] font-montserrat">
-                        +{item.techStack.length - 2}
+                        +{item.portfolio_techstack.length - 2}
                       </p>
                     </div>
                   )}
                 </div>
                 <p className="text-caption text-neutral-500 font-montserrat">
-                  Client: {item.client}
+                  Client: {item.client_name}
                 </p>
               </div>
             </div>
@@ -125,6 +157,9 @@ export default function PortfolioList() {
           </div>
         </div>
       </div>
+        {isModalDetail && selectedPortfolio &&(
+          <PortfolioDetailModal portfolio={selectedPortfolio} />
+        )}
     </div>
   );
 }

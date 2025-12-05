@@ -1,12 +1,36 @@
-"use client"
+"use client";
 
-import { Menu, Bell, LogOut, Search } from "lucide-react"
+import { Menu, Bell, LogOut, Search } from "lucide-react";
+import { useUIStore } from "@/store/useUiStore";
+import { ModalConfirmation } from "../modal/modalConfirmation";
+import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { useState } from "react";
 
 interface NavbarProps {
-  onMenuClick: () => void
+  onMenuClick: () => void;
 }
 
 export default function Navbar({ onMenuClick }: NavbarProps) {
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+  const open = useUIStore((state) => state.open);
+  const close = useUIStore((state) => state.close);
+  const isModalLogout = useUIStore((state) => state.activeModal === "logout");
+  const handleLogout = async () => {
+    setIsLoading(true);
+    await signOut({
+      redirect: true,
+      callbackUrl: "/",
+    });
+    close();
+    setIsLoading(false);
+    router.push("/");
+    router.refresh();
+    toast.success("Logout berhasil!");
+  };
+
   return (
     <nav className="h-14 sm:h-16 bg-neutral-white border-b border-gray-200 flex items-center justify-between px-3 sm:px-6 gap-2 sm:gap-4 shadow-sm">
       {/* Left Section - Menu Button */}
@@ -22,7 +46,10 @@ export default function Navbar({ onMenuClick }: NavbarProps) {
       {/* Center Section - Search */}
       <div className="hidden md:flex flex-1 max-w-md">
         <div className="w-full relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+          <Search
+            className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+            size={18}
+          />
           <input
             type="text"
             placeholder="Cari artikel..."
@@ -37,9 +64,24 @@ export default function Navbar({ onMenuClick }: NavbarProps) {
           <Bell size={18} className="text-primary sm:w-5 sm:h-5" />
         </button>
         <button className="h-8 w-8 sm:h-10 sm:w-10 flex items-center justify-center rounded-lg hover:bg-red-50 transition-colors">
-          <LogOut size={18} className="text-primary  sm:w-5 sm:h-5" />
+          <LogOut
+            size={18}
+            className="text-primary  sm:w-5 sm:h-5"
+            onClick={() => open("logout")}
+          />
         </button>
       </div>
+      {isModalLogout && (
+        <ModalConfirmation
+          title="Logout"
+          message="Apakah Anda yakin ingin logout?"
+          onClose={close}
+          isLoading={isLoading}
+          onConfirm={() => {
+            handleLogout();
+          }}
+        />
+      )}
     </nav>
-  )
+  );
 }

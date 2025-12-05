@@ -78,13 +78,13 @@ export default function Footer() {
         </p>
         <div className="flex gap-8">
           <Link
-            href="https://www.linkedin.com/company/talenta-digital-solutions/"
+            href="https://www.linkedin.com/company/talenta-digital-solution/"
             target="_blank"
           >
             <LinkedInIcon className="size-6 shrink-0" />
           </Link>
           <Link
-            href="https://www.instagram.com/talentadigitalsolution/"
+            href="https://www.instagram.com/talentadigis.official/"
             target="_blank"
           >
             <InstagramIcon className="size-6 shrink-0" />
@@ -92,7 +92,7 @@ export default function Footer() {
         </div>
 
         <Link
-          href="/whatsapp"
+          href="https://wa.me/6285869887731"
           className="absolute inset-0 left-auto right-5 2xl:right-70 -top-5 md:-top-7 lg:size-15 size-10 md:size-13 bg-light-primary p-2.5 rounded-full"
         >
           <WhatsAppIcon className="lg:size-10 md:size-8 size-5 shrink-0 text-primary" />

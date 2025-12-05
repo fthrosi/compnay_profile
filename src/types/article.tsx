@@ -3,11 +3,17 @@ export type detailType = {
     label: string;
 };
 
+export type articleCategoriesType = {
+    id: number;
+    name: string;
+};
+
 export type Article = {
     id: number;
     title: string;
-    type: string;
-    image: string;
-    description: string;
-    detail: detailType[];
+    category: articleCategoriesType;
+    image_id: string;
+    image_url: string;
+    content: string;
+    created_at: string;
 };

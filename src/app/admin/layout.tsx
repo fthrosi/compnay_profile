@@ -5,6 +5,7 @@ import type React from "react"
 import { useState } from "react"
 import Sidebar from "@/components/navigation/admin-sidebar"
 import Navbar from "@/components/navigation/admin-navbar"
+import { SessionProvider } from "next-auth/react"
 
 export default function AdminLayout({
   children,
@@ -16,6 +17,7 @@ export default function AdminLayout({
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen)
 
   return (
+    <SessionProvider>
     <div className="flex h-screen bg-background overflow-hidden">
       {/* Sidebar */}
       <Sidebar isOpen={sidebarOpen} onToggle={toggleSidebar} />
@@ -31,5 +33,6 @@ export default function AdminLayout({
         </main>
       </div>
     </div>
+    </SessionProvider>
   )
 }

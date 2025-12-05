@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { detail } from "@/const/articles";
+import { Calendar, User } from "lucide-react";
 
 export default function FeaturedArticle() {
   return (
@@ -31,14 +31,22 @@ export default function FeaturedArticle() {
             </p>
           </div>
           <div className="flex lg:gap-8 md:gap-4 gap-2">
-            {detail.map((item, index) => (
-              <div className="flex lg:gap-4 md:gap-2 gap-1" key={item.label}>
-                <div>{item.icon}</div>
+            <div className="flex lg:gap-4 gap-1">
+                <div>
+                  <User className="size-4 text-neutral-500" />
+                </div>
                 <p className="text-caption text-neutral-500 font-montserrat">
-                  {item.label}
+                  Admin
                 </p>
               </div>
-            ))}
+              <div className="flex lg:gap-4 gap-1">
+                <div>
+                  <Calendar className="size-4 text-neutral-500" />
+                </div>
+                <p className="text-caption text-neutral-500 font-montserrat">
+                  June 15, 2023
+                </p>
+              </div>
           </div>
         </div>
       </div>
