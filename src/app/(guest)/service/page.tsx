@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Check } from "lucide-react";
-import CTASection from "@/components/Section/CTASection";
 
 export default function ServicesPage() {
   const services = [
@@ -67,6 +66,7 @@ export default function ServicesPage() {
     },
   ];
 
+
   return (
     <main className="pt-20 bg-white">
       {/* HERO SECTION */}
@@ -75,12 +75,12 @@ export default function ServicesPage() {
         <div className="hidden sm:block absolute top-0 right-0 lg:w-152 lg:h-88 md:w-md md:h-64 w-[20rem] h-48 rounded-full bg-linear-to-r from-[#FCD880] via-[#87BBD7] to-primary blur-[80px] rotate-25 translate-x-32 -translate-y-16 z-0"></div>
 
         <div className="relative flex flex-col justify-center items-center gap-7.5 z-10">
-          <div className="px-5 py-2 rounded-[0.938rem] bg-primto-primary text-white font-semibold text-sm md:text-base">
+          <div className="px-5 py-2 rounded-[0.938rem] bg-primary text-white font-semibold text-sm md:text-base">
             Our Services
           </div>
 
           <h1 className="lg:text-5xl md:text-4xl text-3xl font-extrabold text-neutral-black text-center leading-tight font-montserrat">
-            <span className="text-primto-primary">Digital Solutions</span>
+            <span className="text-primary">Digital Solutions</span>
             <br />
             That Drive Growth
           </h1>
@@ -98,7 +98,7 @@ export default function ServicesPage() {
           {services.map((service, index) => (
             <div
               key={index}
-              className="group relative bg-white border border-[#E5E7EB] rounded-[1.25rem] shadow-sm hover:shadow-md hover:border-primto-primary/40 transition-all duration-300 p-8 text-left"
+              className="group relative bg-white border border-[#E5E7EB] rounded-[1.25rem] shadow-sm hover:shadow-md hover:border-primary/40 transition-all duration-300 p-8 text-left"
             >
               {/* ICON */}
               <div className="inline-flex items-center justify-center w-12 h-12 bg-[#E9F0FF] rounded-xl mb-6">
@@ -111,7 +111,7 @@ export default function ServicesPage() {
               </div>
 
               {/* TITLE */}
-              <h3 className="text-xl font-bold text-primto-primary mb-3 font-montserrat">
+              <h3 className="text-xl font-bold text-primary mb-3 font-montserrat">
                 {service.title}
               </h3>
 
@@ -124,7 +124,7 @@ export default function ServicesPage() {
               <ul className="space-y-3 mb-8 text-gray-700 font-montserrat">
                 {service.features.map((item, i) => (
                   <li key={i} className="flex items-center gap-3">
-                    <span className="flex items-center justify-center w-5 h-5 rounded-full bg-primto-primary/90">
+                    <span className="flex items-center justify-center w-5 h-5 rounded-full bg-primary/90">
                       <Check className="w-3.5 h-3.5 text-white" />
                     </span>
                     <span>{item}</span>
@@ -136,11 +136,11 @@ export default function ServicesPage() {
               <div className="flex items-center">
                 <Link
                   href="#"
-                  className="inline-flex items-center gap-2 bg-primto-primary hover:bg-[#17348A] text-white font-semibold px-5 py-2.5 rounded-lg transition-all"
+                  className="inline-flex items-center gap-2 bg-primary hover:bg-[#17348A] text-white font-semibold px-5 py-2.5 rounded-lg transition-all"
                 >
                   Free Consultation →
                 </Link>
-                <button className="ml-2 w-9 h-9 border border-[#E5E7EB] rounded-lg flex items-center justify-center text-gray-500 hover:text-primto-primary hover:border-primto-primary transition-all">
+                <button className="ml-2 w-9 h-9 border border-[#E5E7EB] rounded-lg flex items-center justify-center text-gray-500 hover:text-primary hover:border-primary transition-all">
                   i
                 </button>
               </div>
@@ -148,8 +148,6 @@ export default function ServicesPage() {
           ))}
         </div>
       </section>
-
-      <CTASection />
     </main>
   );
 }
