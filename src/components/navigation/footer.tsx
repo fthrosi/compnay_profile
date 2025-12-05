@@ -6,11 +6,14 @@ import Link from "next/link";
 import LinkedInIcon from "@/icons/linkedin";
 import InstagramIcon from "@/icons/instagram";
 import WhatsAppIcon from "@/icons/whatsapp";
+
 export default function Footer() {
   return (
     <div className="w-full font-montserrat">
+      {/* Bagian atas footer */}
       <div className="w-full bg-primary-dark py-13.5">
         <div className="container-layout w-full flex flex-col lg:flex-row gap-8 lg:gap-0 justify-between">
+          {/* Kolom kiri: logo & kontak */}
           <div className="flex flex-col gap-4.5 lg:w-104.5 text-neutral-white">
             <Image
               src="/images/logo-white.png"
@@ -42,6 +45,8 @@ export default function Footer() {
               </p>
             </div>
           </div>
+
+          {/* Kolom tengah: navigasi */}
           <div className="flex flex-col gap-4.5 lg:text-body-m text-caption text-neutral-white">
             <h6 className="font-bold">Company</h6>
             <Link href="/about">About Us</Link>
@@ -49,9 +54,11 @@ export default function Footer() {
             <Link href="/portofolio">Portofolio</Link>
             <Link href="/insight">Insights</Link>
           </div>
+
+          {/* Kolom kanan: daftar services */}
           <div className="flex">
             <div className="flex flex-col gap-4.5">
-              <h6 className="font-bold">Services</h6>
+              <h6 className="font-bold text-white">Services</h6>
               <div className="flex gap-6 text-neutral-white lg:text-body-m text-caption">
                 <div className="flex flex-col gap-4.5">
                   <p>Web Design & Development</p>
@@ -72,25 +79,29 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className="relative w-full bg-neutral-black text-neutral-white flex flex-col md:flex-row justify-center md:gap-8 gap-5  py-5 items-center">
-        <p className="lg:text-body-m text-caption">
+
+      {/* Bagian bawah footer */}
+      <div className="relative w-full bg-neutral-black text-neutral-white flex flex-col md:flex-row justify-center md:gap-8 gap-5 py-5 items-center">
+        <p className="lg:text-body-m text-caption text-center">
           Copyright © 2025 PT Talenta Digital Solution
         </p>
+
         <div className="flex gap-8">
           <Link
             href="https://www.linkedin.com/company/talenta-digital-solution/"
             target="_blank"
           >
-            <LinkedInIcon className="size-6 shrink-0" />
+            <LinkedInIcon className="size-6 shrink-0 hover:text-light-primary transition" />
           </Link>
           <Link
             href="https://www.instagram.com/talentadigis.official/"
             target="_blank"
           >
-            <InstagramIcon className="size-6 shrink-0" />
+            <InstagramIcon className="size-6 shrink-0 hover:text-light-primary transition" />
           </Link>
         </div>
 
+        {/* Tombol WhatsApp */}
         <Link
           href="https://wa.me/6285869887731"
           className="absolute inset-0 left-auto right-5 2xl:right-70 -top-5 md:-top-7 lg:size-15 size-10 md:size-13 bg-light-primary p-2.5 rounded-full"

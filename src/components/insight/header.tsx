@@ -4,7 +4,7 @@ export default function HeaderInsight() {
       <div className="lg:h-150 h-130 bg-light-primary rounded-b-[5.625rem] lg:pt-[7.438rem] pt-20 flex justify-center items-center">
         <div className="relative flex flex-col justify-center items-center gap-7.5">
           <div className="px-4 z-2 py-1.5 rounded-[0.938rem] bg-primary flex justify-center items-center">
-            <h4 className="lg:text-h4 text-h6 md:text-h5 font-bold font-montserrat">
+            <h4 className="lg:text-h4 text-h6 md:text-h5 font-bold font-montserrat text-white">
               Insight
             </h4>
           </div>
