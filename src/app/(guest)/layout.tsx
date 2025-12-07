@@ -5,6 +5,7 @@ import type React from "react";
 import { useState } from "react";
 import Navbar from "@/components/navigation/navbar";
 import Footer from "@/components/navigation/footer";
+import FloatingWhatsapp from "@/components/navigation/floatingWhatsapp";
 
 export default function AdminLayout({
   children,
@@ -16,11 +17,14 @@ export default function AdminLayout({
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
   return (
-    <div className="flex flex-col bg-neutral-white">
+    <div className="flex flex-col bg-neutral-white relative overflow-x-hidden scroll-smooth">
       {/* Navbar */}
       <Navbar />
-      <main>{children}</main>
+      <main>
+        {children}
+      </main>
       <Footer />
+      <FloatingWhatsapp />
     </div>
   );
 }

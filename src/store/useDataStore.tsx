@@ -1,8 +1,8 @@
 import { create } from "zustand";
 import { TechStack } from "@/types/techstack";
 import { Role } from "@/types/role";
-import type { categoryPortfolioType as Category_Portfolio } from "@/types/portofolio.type";
-import type { articleCategoriesType as Category_Article } from "@/types/article";
+import type { categoryPortfolioType as Category_Portfolio, portofolioType } from "@/types/portofolio.type";
+import type { articleCategoriesType as Category_Article,Article } from "@/types/article";
 
 interface DataState {
   // ✅ Tech Stacks
@@ -25,12 +25,24 @@ interface DataState {
   setArticleCategories: (categories: Category_Article[]) => void;
   fetchArticleCategories: () => Promise<void>;
 
+  //✅ Portfolio Data
+  portfolios: portofolioType[];
+  setPortfolios: (portfolios: portofolioType[]) => void;
+  fetchPortfolios: () => Promise<void>;
+
+  //✅ Article Data
+  articles: Article[];
+  setArticles: (articles: Article[]) => void;
+  fetchArticles: () => Promise<void>;
+
   // ✅ Loading states
   isLoading: {
     techStacks: boolean;
     roles: boolean;
     portfolioCategories: boolean;
     articleCategories: boolean;
+    portfolios: boolean;
+    articles: boolean;
   };
 
   // ✅ Reset all data
@@ -38,6 +50,53 @@ interface DataState {
 }
 
 export const useDataStore = create<DataState>((set, get) => ({
+  // ========== PORTFOLIO ==========
+  portfolios: [],
+  setPortfolios: (portfolios) => set({ portfolios }),
+  fetchPortfolios: async () => {
+    if (get().portfolios.length > 0) return;
+    set((state) => ({
+      isLoading: { ...state.isLoading, portfolios: true },
+    }));
+    try {
+      const res = await fetch("/api/portfolio",{
+        method: "GET",
+      });
+      const data = await res.json();
+      set({ portfolios: data.data || [] });
+    }catch (error) {
+      console.error("Error fetching portfolios:", error);
+    } finally {
+      set((state) => ({
+        isLoading: { ...state.isLoading, portfolios: false },
+      }));
+    }
+  },
+
+  // ========== ARTICLES ==========
+  articles: [],
+  setArticles: (articles) => set({ articles }),
+  fetchArticles: async () => {
+    if (get().articles.length > 0) return;
+
+    set((state) => ({
+      isLoading: { ...state.isLoading, articles: true },
+    }));
+    try {
+      const res = await fetch("/api/article",{
+        method: "GET",
+      });
+      const data = await res.json();
+      set({ articles: data.data || [] });
+    } catch (error) {
+      console.error("Error fetching articles:", error);
+    } finally {
+      set((state) => ({
+        isLoading: { ...state.isLoading, articles: false },
+      }));
+    }
+  },
+
   // ========== TECH STACKS ==========
   techStacks: [],
   setTechStacks: (stacks) => set({ techStacks: stacks }),
@@ -145,6 +204,8 @@ export const useDataStore = create<DataState>((set, get) => ({
     roles: false,
     portfolioCategories: false,
     articleCategories: false,
+    portfolios: false,
+    articles: false,
   },
 
   // ========== RESET ALL ==========
@@ -154,11 +215,15 @@ export const useDataStore = create<DataState>((set, get) => ({
       roles: [],
       portfolioCategories: [],
       articleCategories: [],
+      portfolios: [],
+      articles: [],
       isLoading: {
         techStacks: false,
         roles: false,
         portfolioCategories: false,
         articleCategories: false,
+        portfolios: false,
+        articles: false,
       },
     }),
 }));

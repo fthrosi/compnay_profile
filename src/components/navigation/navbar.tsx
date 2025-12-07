@@ -8,13 +8,19 @@ import RightArrow from "@/icons/right-arrow";
 import BurgerIcon from "@/icons/burger-icon";
 import XIcon from "@/icons/x-icon";
 import { useState } from "react";
+import { motion } from "motion/react";
 
 export default function Navbar() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="w-full fixed top-0 left-0 z-50 bg-neutral-white">
+    <motion.div 
+    initial={{ y: -100, opacity: 0 }}
+    animate={{ y: 0, opacity: 1 }}
+    transition={{ duration: 0.5 }}
+    viewport={{ once: true }}
+    className="w-full fixed top-0 left-0 z-50 bg-neutral-white">
       {/* Navbar utama */}
       <div className="container-layout flex items-center justify-between md:h-[7.438rem] h-20">
         <Image
@@ -43,7 +49,7 @@ export default function Navbar() {
 
         {/* Tombol Contact Us (desktop) */}
         <Link
-          href="/contact"
+          href="/about#contact"
           className="hidden md:flex bg-primary text-neutral-white font-montserrat lg:text-button md:text-body-m font-bold lg:px-4 lg:py-2.5 md:py-2 md:px-3.5 rounded-[0.625rem] gap-1 items-center"
         >
           Contact Us
@@ -95,9 +101,9 @@ export default function Navbar() {
 
           {/* Contact Us (mobile) */}
           <Link
-            href="/contact"
-            className={`flex font-montserrat text-body-m px-4 py-2.5 rounded-[0.625rem] gap-1 items-center justify-center ${
-              pathname === "/contact"
+            href="/about#contact"
+            className={`flex font-montserrat text-body-m px-4 py-2.5 rounded-[0.625rem] gap-1 items-center justify-start ${
+              pathname === "/about#contact"
                 ? "bg-primary font-semibold text-neutral-white"
                 : "text-neutral-black"
             }`}
@@ -107,6 +113,6 @@ export default function Navbar() {
           </Link>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
