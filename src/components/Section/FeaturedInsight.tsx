@@ -36,7 +36,7 @@ const FeaturedInsight: React.FC = () => {
 
   return (
     <section className="relative w-screen h-[75vh] md:h-[80vh] overflow-hidden left-1/2 -translate-x-1/2">
-      {/* Background image (full width) */}
+      {/* Background image */}
       <div className="absolute inset-0">
         <Image
           src={currentInsight.img}
@@ -48,11 +48,12 @@ const FeaturedInsight: React.FC = () => {
         <div className="absolute inset-0 bg-black/50" />
       </div>
 
-      {/* Content (centered text) */}
+      {/* Main Content */}
       <div className="relative z-10 flex flex-col items-center justify-center text-center h-full px-6 md:px-10 text-white mx-auto max-w-5xl">
         <h1 className="text-3xl md:text-5xl font-extrabold leading-snug mb-4">
           {currentInsight.title}
         </h1>
+
         <p className="text-base md:text-lg text-gray-200 max-w-3xl mb-8">
           {currentInsight.desc}
         </p>

@@ -27,16 +27,19 @@ export default function Footer() {
               PT Talenta Digital Solution, we deliver digital solutions that
               transform every challenge into business opportunities.
             </p>
+
             <div className="flex gap-3">
               <EmailIcon className="lg:size-5 size-4 text-neutral-white shrink-0" />
               <p className="lg:text-body-m text-caption">
                 talentadigitalsolution@gmail.com
               </p>
             </div>
+
             <div className="flex gap-3">
               <TeleponIcon className="lg:size-5 size-4 text-neutral-white shrink-0" />
               <p className="lg:text-body-m text-caption">+62 812-3456-7890</p>
             </div>
+
             <div className="flex gap-3">
               <LocationIcon className="lg:size-5 size-4 text-neutral-white shrink-0" />
               <p className="lg:text-body-m text-caption">
@@ -58,7 +61,7 @@ export default function Footer() {
           {/* Kolom kanan: daftar services */}
           <div className="flex">
             <div className="flex flex-col gap-4.5">
-              <h6 className="font-bold">Services</h6>
+              <h6 className="font-bold text-neutral-white">Services</h6>
               <div className="flex gap-6 text-neutral-white lg:text-body-m text-caption">
                 <div className="flex flex-col gap-4.5">
                   <p>Web Design & Development</p>
@@ -67,6 +70,7 @@ export default function Footer() {
                   <p>UX Research & Consulting</p>
                   <p>SEO & Digital Marketing</p>
                 </div>
+
                 <div className="flex flex-col gap-4.5">
                   <p>Frontend Development</p>
                   <p>Game Development</p>
@@ -93,6 +97,7 @@ export default function Footer() {
           >
             <LinkedInIcon className="size-6 shrink-0 hover:text-light-primary transition" />
           </Link>
+
           <Link
             href="https://www.instagram.com/talentadigitalsolution/"
             target="_blank"
