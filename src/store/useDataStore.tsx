@@ -1,0 +1,229 @@
+import { create } from "zustand";
+import { TechStack } from "@/types/techstack";
+import { Role } from "@/types/role";
+import type { categoryPortfolioType as Category_Portfolio, portofolioType } from "@/types/portofolio.type";
+import type { articleCategoriesType as Category_Article,Article } from "@/types/article";
+
+interface DataState {
+  // ✅ Tech Stacks
+  techStacks: TechStack[];
+  setTechStacks: (stacks: TechStack[]) => void;
+  fetchTechStacks: () => Promise<void>;
+
+  // ✅ Roles
+  roles: Role[];
+  setRoles: (roles: Role[]) => void;
+  fetchRoles: () => Promise<void>;
+
+  // ✅ Portfolio Categories
+  portfolioCategories: Category_Portfolio[];
+  setPortfolioCategories: (categories: Category_Portfolio[]) => void;
+  fetchPortfolioCategories: () => Promise<void>;
+
+  // ✅ Article Categories
+  articleCategories: Category_Article[];
+  setArticleCategories: (categories: Category_Article[]) => void;
+  fetchArticleCategories: () => Promise<void>;
+
+  //✅ Portfolio Data
+  portfolios: portofolioType[];
+  setPortfolios: (portfolios: portofolioType[]) => void;
+  fetchPortfolios: () => Promise<void>;
+
+  //✅ Article Data
+  articles: Article[];
+  setArticles: (articles: Article[]) => void;
+  fetchArticles: () => Promise<void>;
+
+  // ✅ Loading states
+  isLoading: {
+    techStacks: boolean;
+    roles: boolean;
+    portfolioCategories: boolean;
+    articleCategories: boolean;
+    portfolios: boolean;
+    articles: boolean;
+  };
+
+  // ✅ Reset all data
+  resetAllData: () => void;
+}
+
+export const useDataStore = create<DataState>((set, get) => ({
+  // ========== PORTFOLIO ==========
+  portfolios: [],
+  setPortfolios: (portfolios) => set({ portfolios }),
+  fetchPortfolios: async () => {
+    if (get().portfolios.length > 0) return;
+    set((state) => ({
+      isLoading: { ...state.isLoading, portfolios: true },
+    }));
+    try {
+      const res = await fetch("/api/portfolio",{
+        method: "GET",
+      });
+      const data = await res.json();
+      set({ portfolios: data.data || [] });
+    }catch (error) {
+      console.error("Error fetching portfolios:", error);
+    } finally {
+      set((state) => ({
+        isLoading: { ...state.isLoading, portfolios: false },
+      }));
+    }
+  },
+
+  // ========== ARTICLES ==========
+  articles: [],
+  setArticles: (articles) => set({ articles }),
+  fetchArticles: async () => {
+    if (get().articles.length > 0) return;
+
+    set((state) => ({
+      isLoading: { ...state.isLoading, articles: true },
+    }));
+    try {
+      const res = await fetch("/api/article",{
+        method: "GET",
+      });
+      const data = await res.json();
+      set({ articles: data.data || [] });
+    } catch (error) {
+      console.error("Error fetching articles:", error);
+    } finally {
+      set((state) => ({
+        isLoading: { ...state.isLoading, articles: false },
+      }));
+    }
+  },
+
+  // ========== TECH STACKS ==========
+  techStacks: [],
+  setTechStacks: (stacks) => set({ techStacks: stacks }),
+  fetchTechStacks: async () => {
+    // ✅ Cek apakah data sudah ada (cache)
+    if (get().techStacks.length > 0) return;
+
+    set((state) => ({
+      isLoading: { ...state.isLoading, techStacks: true },
+    }));
+
+    try {
+      const res = await fetch("/api/techstack",{
+        method: "GET",
+      });
+      const data = await res.json();
+      set({ techStacks: data.data || [] });
+    } catch (error) {
+      console.error("Error fetching tech stacks:", error);
+    } finally {
+      set((state) => ({
+        isLoading: { ...state.isLoading, techStacks: false },
+      }));
+    }
+  },
+
+  // ========== ROLES ==========
+  roles: [],
+  setRoles: (roles) => set({ roles }),
+  fetchRoles: async () => {
+    if (get().roles.length > 0) return;
+
+    set((state) => ({
+      isLoading: { ...state.isLoading, roles: true },
+    }));
+
+    try {
+      const res = await fetch("/api/role",{
+        method: "GET",
+      });
+      const data = await res.json();
+      set({ roles: data.data || [] });
+    } catch (error) {
+      console.error("Error fetching roles:", error);
+    } finally {
+      set((state) => ({
+        isLoading: { ...state.isLoading, roles: false },
+      }));
+    }
+  },
+
+  // ========== PORTFOLIO CATEGORIES ==========
+  portfolioCategories: [],
+  setPortfolioCategories: (categories) => set({ portfolioCategories: categories }),
+  fetchPortfolioCategories: async () => {
+    if (get().portfolioCategories.length > 0) return;
+
+    set((state) => ({
+      isLoading: { ...state.isLoading, portfolioCategories: true },
+    }));
+
+    try {
+      const res = await fetch("/api/category_portfolio",{
+        method: "GET",
+      });
+      const data = await res.json();
+      set({ portfolioCategories: data.data || [] });
+    } catch (error) {
+      console.error("Error fetching portfolio categories:", error);
+    } finally {
+      set((state) => ({
+        isLoading: { ...state.isLoading, portfolioCategories: false },
+      }));
+    }
+  },
+
+  // ========== ARTICLE CATEGORIES ==========
+  articleCategories: [],
+  setArticleCategories: (categories) => set({ articleCategories: categories }),
+  fetchArticleCategories: async () => {
+    if (get().articleCategories.length > 0) return;
+
+    set((state) => ({
+      isLoading: { ...state.isLoading, articleCategories: true },
+    }));
+
+    try {
+      const res = await fetch("/api/category_article",{
+        method: "GET",
+      });
+      const data = await res.json();
+      set({ articleCategories: data.data || [] });
+    } catch (error) {
+      console.error("Error fetching article categories:", error);
+    } finally {
+      set((state) => ({
+        isLoading: { ...state.isLoading, articleCategories: false },
+      }));
+    }
+  },
+
+  // ========== LOADING STATES ==========
+  isLoading: {
+    techStacks: false,
+    roles: false,
+    portfolioCategories: false,
+    articleCategories: false,
+    portfolios: false,
+    articles: false,
+  },
+
+  // ========== RESET ALL ==========
+  resetAllData: () =>
+    set({
+      techStacks: [],
+      roles: [],
+      portfolioCategories: [],
+      articleCategories: [],
+      portfolios: [],
+      articles: [],
+      isLoading: {
+        techStacks: false,
+        roles: false,
+        portfolioCategories: false,
+        articleCategories: false,
+        portfolios: false,
+        articles: false,
+      },
+    }),
+}));

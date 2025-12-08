@@ -3,17 +3,39 @@ import useEmblaCarousel from "embla-carousel-react";
 import AutoScroll from "embla-carousel-auto-scroll";
 import { teamData } from "@/const/team";
 import type { TeamMember } from "@/types/team.type";
+import { motion } from "motion/react";
 
 export default function TeamCarousel() {
   const [emblaRef] = useEmblaCarousel({ loop: true }, [
     AutoScroll({ speed: 1, stopOnInteraction: false }),
   ]);
   const lastId = teamData[teamData.length - 1].id;
+  const containerCarousel = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        duration: 0.5,
+      },
+    },
+  };
+  const cardVariant = {
+    hidden: { opacity: 0, y: 50 },
+    show: { opacity: 1, y: 0 },
+  };
   return (
     <div className="overflow-hidden w-full" ref={emblaRef}>
-      <div className="flex gap-6">
+      <motion.div
+        variants={containerCarousel}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="flex gap-6"
+      >
         {teamData.map((member: TeamMember) => (
-          <div
+          <motion.div
+            variants={cardVariant}
             key={member.id}
             className={`relative xl:min-w-[25%] md:min-w-[33.3%] min-w-full sm:min-w-[50%] aspect-306/365 rounded-2xl p-6 shadow hover:shadow-lg transition-all ${
               member.id === lastId ? "mr-6" : ""
@@ -33,9 +55,9 @@ export default function TeamCarousel() {
                 {member.jabatan}
               </p>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }

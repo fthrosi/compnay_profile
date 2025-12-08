@@ -8,20 +8,20 @@ const FeaturedInsight: React.FC = () => {
   const insights = [
     {
       img: "/images/people.png",
-      title: "AI Generatif: Dari Sekadar Alat Kreatif hingga Mesin Inovasi",
-      desc: "Kecerdasan buatan generatif kini tidak hanya menghasilkan teks atau gambar, tetapi juga membantu riset ilmiah, desain produk, bahkan musik. Artikel ini mengulas dampaknya pada industri kreatif dan etika penggunaannya.",
+      title: "Generative AI: From Creative Tools to Innovation Machines",
+      desc: "Generative artificial intelligence now not only produces text or images, but also assists in scientific research, product design, and even music. This article reviews its impact on the creative industry and the ethics of its use..",
       link: "#",
     },
     {
       img: "/images/insight2.png",
-      title: "Transformasi Digital Menuju Efisiensi Operasional",
-      desc: "Pelajari bagaimana transformasi digital dapat meningkatkan efisiensi bisnis melalui adopsi teknologi cerdas dan kolaborasi lintas tim.",
+      title: "Digital Transformation Towards Operational Efficiency",
+      desc: "Learn how digital transformation can improve business efficiency through the adoption of smart technologies and cross-team collaboration.",
       link: "#",
     },
     {
       img: "/images/insight3.png",
-      title: "Solusi Cloud untuk Akselerasi Bisnis Modern",
-      desc: "Ketahui bagaimana solusi cloud membantu perusahaan berinovasi lebih cepat, menekan biaya operasional, dan meningkatkan skalabilitas sistem.",
+      title: "Cloud Solutions for Modern Business Acceleration",
+      desc: "Discover how cloud solutions help companies innovate faster, reduce operating costs, and improve system scalability.",
       link: "#",
     },
   ];

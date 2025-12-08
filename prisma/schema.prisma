@@ -1,0 +1,145 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                 Int              @id @default(autoincrement())
+  name               String           @db.VarChar(15)
+  role_id            Int
+  email              String           @db.VarChar(30) @unique
+  password           String           @db.VarChar(255)
+  created_at         DateTime         @default(now()) @db.Timestamp(0)
+  role               Role             @relation(fields: [role_id], references: [id], map: "fk_user_role")
+
+  @@index([role_id], map: "fk_user_role")
+  @@map("users")
+}
+
+model Role {
+  id                 Int              @id @default(autoincrement())
+  name               String           @db.VarChar(30)
+  created_at         DateTime         @default(now()) @db.Timestamp(0)
+
+  users              User[]
+  teams              Team[]
+  
+  @@map("roles")
+}
+
+model Team {
+  id                 Int              @id @default(autoincrement())
+  name               String           @db.VarChar(15)
+  role_id            Int
+  image_url          String           @db.VarChar(255)
+  image_id           String           @db.VarChar(255)
+  created_at         DateTime         @default(now()) @db.Timestamp(0)
+  updated_at         DateTime         @default(now()) @updatedAt @db.Timestamp(0)
+  role               Role             @relation(fields: [role_id], references: [id], map: "fk_team_role")
+
+  @@index([role_id], map: "fk_team_role")
+  @@map("teams")
+}
+
+model Article {
+  id                 Int              @id @default(autoincrement())
+  title              String           @db.VarChar(30)
+  category_id        Int
+  image_url          String           @db.VarChar(255)
+  image_id           String           @db.VarChar(255)
+  content            String           @db.LongText
+  created_at         DateTime         @default(now()) @db.Timestamp(0)
+  updated_at         DateTime         @default(now()) @updatedAt @db.Timestamp(0)
+  category           Category_Article @relation(fields: [category_id], references: [id], map: "fk_article_category")
+
+  @@index([category_id], map: "fk_article_category")
+  @@map("articles")
+}
+
+model Category_Article {
+  id                 Int              @id @default(autoincrement())
+  name               String           @db.VarChar(30)
+  created_at         DateTime         @default(now()) @db.Timestamp(0)
+  updated_at         DateTime         @default(now()) @updatedAt @db.Timestamp(0)
+  articles           Article[]       
+  @@map("category_articles")
+}
+
+model Portfolio {
+  id                  Int                @id @default(autoincrement())
+  name                String             @db.VarChar(30)
+  link                String?            @db.VarChar(255)
+  description         String             @db.Text
+  client_name         String             @db.VarChar(30)
+  thumbnail_url       String             @db.VarChar(255)
+  thumbnail_id        String             @db.VarChar(255)
+  created_at          DateTime           @default(now()) @db.Timestamp(0)
+  updated_at          DateTime           @default(now()) @updatedAt @db.Timestamp(0)
+  category_id         Int
+  category            Category_Portfolio @relation(fields: [category_id], references: [id], map: "fk_portfolio_category")
+
+  portfolio_images    Portfolio_Image[]
+  portfolio_techstack Portfolio_TechStack[]
+
+  @@index([category_id], map: "fk_portfolio_category")
+  @@map("portfolios")
+}
+
+model Portfolio_Image {
+  id                 Int                @id @default(autoincrement())
+  image_url          String             @db.VarChar(255)
+  image_id           String             @db.VarChar(255)
+  portfolio_id       Int
+  created_at         DateTime           @default(now()) @db.Timestamp(0)
+  updated_at         DateTime           @default(now()) @updatedAt @db.Timestamp(0)
+  portfolio          Portfolio          @relation(fields: [portfolio_id], references: [id], map: "fk_portfolio_image")
+
+  @@index([portfolio_id], map: "fk_portfolio_image")
+  @@map("portfolio_images")
+}
+
+model Category_Portfolio {
+  id                 Int              @id @default(autoincrement())
+  name               String           @db.VarChar(30)
+  created_at         DateTime         @default(now()) @db.Timestamp(0)
+  updated_at         DateTime         @default(now()) @updatedAt @db.Timestamp(0)
+
+  portfolios         Portfolio[]
+
+  @@map("category_portfolios")
+}
+
+model TechStack {
+  id                 Int              @id @default(autoincrement())
+  name               String           @db.VarChar(30)
+  created_at         DateTime         @default(now()) @db.Timestamp(0)
+  updated_at         DateTime         @default(now()) @updatedAt @db.Timestamp(0)
+
+  portfolios         Portfolio_TechStack[]
+
+  @@map("techstack")
+}
+
+model Portfolio_TechStack {
+  id           Int        @id @default(autoincrement())
+
+  portfolioId  Int
+  techstackId  Int
+
+  portfolio    Portfolio  @relation(fields: [portfolioId], references: [id], map: "fk_portfolio_techstack")
+  techstack    TechStack  @relation(fields: [techstackId], references: [id], map: "fk_tectstack_portfolio")
+
+  @@unique([portfolioId, techstackId]) 
+  @@map("portfolio_techstack")         
+}

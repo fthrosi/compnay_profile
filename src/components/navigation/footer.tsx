@@ -31,13 +31,13 @@ export default function Footer() {
             <div className="flex gap-3">
               <EmailIcon className="lg:size-5 size-4 text-neutral-white shrink-0" />
               <p className="lg:text-body-m text-caption">
-                talentadigitalsolution@gmail.com
+                talentadigis@gmail.com
               </p>
             </div>
 
             <div className="flex gap-3">
               <TeleponIcon className="lg:size-5 size-4 text-neutral-white shrink-0" />
-              <p className="lg:text-body-m text-caption">+62 812-3456-7890</p>
+              <p className="lg:text-body-m text-caption">+62 858-6988-7731</p>
             </div>
 
             <div className="flex gap-3">
@@ -53,7 +53,7 @@ export default function Footer() {
           <div className="flex flex-col gap-4.5 lg:text-body-m text-caption text-neutral-white">
             <h6 className="font-bold">Company</h6>
             <Link href="/about">About Us</Link>
-            <Link href="/services">Services</Link>
+            <Link href="/service">Services</Link>
             <Link href="/portofolio">Portofolio</Link>
             <Link href="/insight">Insights</Link>
           </div>
@@ -61,7 +61,11 @@ export default function Footer() {
           {/* Kolom kanan: daftar services */}
           <div className="flex">
             <div className="flex flex-col gap-4.5">
+<<<<<<< HEAD
               <h6 className="font-bold text-neutral-white">Services</h6>
+=======
+              <h6 className="font-bold text-white">Services</h6>
+>>>>>>> 263121f264452d448cbab1fe469f3b1b5749e562
               <div className="flex gap-6 text-neutral-white lg:text-body-m text-caption">
                 <div className="flex flex-col gap-4.5">
                   <p>Web Design & Development</p>
@@ -85,21 +89,21 @@ export default function Footer() {
       </div>
 
       {/* Bagian bawah footer */}
-      <div className="relative w-full bg-neutral-black text-neutral-white flex flex-col md:flex-row justify-center md:gap-8 gap-5 py-5 items-center">
+      <div className="relative w-full bg-neutral-black text-neutral-white flex flex-col md:flex-row justify-center md:gap-8 gap-5 py-5 items-center" id="footer">
         <p className="lg:text-body-m text-caption text-center">
           Copyright © 2025 PT Talenta Digital Solution
         </p>
 
         <div className="flex gap-8">
           <Link
-            href="https://www.linkedin.com/company/talenta-digital-solutions/"
+            href="https://www.linkedin.com/company/talenta-digital-solution/"
             target="_blank"
           >
             <LinkedInIcon className="size-6 shrink-0 hover:text-light-primary transition" />
           </Link>
 
           <Link
-            href="https://www.instagram.com/talentadigitalsolution/"
+            href="https://www.instagram.com/talentadigis.official/"
             target="_blank"
           >
             <InstagramIcon className="size-6 shrink-0 hover:text-light-primary transition" />
@@ -107,12 +111,12 @@ export default function Footer() {
         </div>
 
         {/* Tombol WhatsApp */}
-        <Link
-          href="/whatsapp"
+        {/* <Link
+          href="https://wa.me/6285869887731"
           className="absolute inset-0 left-auto right-5 2xl:right-70 -top-5 md:-top-7 lg:size-15 size-10 md:size-13 bg-light-primary p-2.5 rounded-full"
         >
           <WhatsAppIcon className="lg:size-10 md:size-8 size-5 shrink-0 text-primary" />
-        </Link>
+        </Link> */}
       </div>
     </div>
   );
