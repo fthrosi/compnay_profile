@@ -45,6 +45,16 @@ interface DataState {
     articles: boolean;
   };
 
+  // ✅ Fetched flags to prevent refetching
+  isFetched: {
+    techStacks: boolean;
+    roles: boolean;
+    portfolioCategories: boolean;
+    articleCategories: boolean;
+    portfolios: boolean;
+    articles: boolean;
+  };
+
   // ✅ Reset all data
   resetAllData: () => void;
 }
@@ -54,7 +64,7 @@ export const useDataStore = create<DataState>((set, get) => ({
   portfolios: [],
   setPortfolios: (portfolios) => set({ portfolios }),
   fetchPortfolios: async () => {
-    if (get().portfolios.length > 0) return;
+    if (get().isFetched.portfolios) return;
     set((state) => ({
       isLoading: { ...state.isLoading, portfolios: true },
     }));
@@ -63,7 +73,10 @@ export const useDataStore = create<DataState>((set, get) => ({
         method: "GET",
       });
       const data = await res.json();
-      set({ portfolios: data.data || [] });
+      set((state) => ({ 
+        portfolios: data.data || [],
+        isFetched: { ...state.isFetched, portfolios: true }
+      }));
     }catch (error) {
       console.error("Error fetching portfolios:", error);
     } finally {
@@ -77,7 +90,7 @@ export const useDataStore = create<DataState>((set, get) => ({
   articles: [],
   setArticles: (articles) => set({ articles }),
   fetchArticles: async () => {
-    if (get().articles.length > 0) return;
+    if (get().isFetched.articles) return;
 
     set((state) => ({
       isLoading: { ...state.isLoading, articles: true },
@@ -87,7 +100,10 @@ export const useDataStore = create<DataState>((set, get) => ({
         method: "GET",
       });
       const data = await res.json();
-      set({ articles: data.data || [] });
+      set((state) => ({ 
+        articles: data.data || [],
+        isFetched: { ...state.isFetched, articles: true }
+      }));
     } catch (error) {
       console.error("Error fetching articles:", error);
     } finally {
@@ -101,8 +117,8 @@ export const useDataStore = create<DataState>((set, get) => ({
   techStacks: [],
   setTechStacks: (stacks) => set({ techStacks: stacks }),
   fetchTechStacks: async () => {
-    // ✅ Cek apakah data sudah ada (cache)
-    if (get().techStacks.length > 0) return;
+    // ✅ Cek apakah data sudah pernah di-fetch
+    if (get().isFetched.techStacks) return;
 
     set((state) => ({
       isLoading: { ...state.isLoading, techStacks: true },
@@ -113,7 +129,10 @@ export const useDataStore = create<DataState>((set, get) => ({
         method: "GET",
       });
       const data = await res.json();
-      set({ techStacks: data.data || [] });
+      set((state) => ({ 
+        techStacks: data.data || [],
+        isFetched: { ...state.isFetched, techStacks: true }
+      }));
     } catch (error) {
       console.error("Error fetching tech stacks:", error);
     } finally {
@@ -127,7 +146,7 @@ export const useDataStore = create<DataState>((set, get) => ({
   roles: [],
   setRoles: (roles) => set({ roles }),
   fetchRoles: async () => {
-    if (get().roles.length > 0) return;
+    if (get().isFetched.roles) return;
 
     set((state) => ({
       isLoading: { ...state.isLoading, roles: true },
@@ -138,7 +157,10 @@ export const useDataStore = create<DataState>((set, get) => ({
         method: "GET",
       });
       const data = await res.json();
-      set({ roles: data.data || [] });
+      set((state) => ({ 
+        roles: data.data || [],
+        isFetched: { ...state.isFetched, roles: true }
+      }));
     } catch (error) {
       console.error("Error fetching roles:", error);
     } finally {
@@ -152,7 +174,7 @@ export const useDataStore = create<DataState>((set, get) => ({
   portfolioCategories: [],
   setPortfolioCategories: (categories) => set({ portfolioCategories: categories }),
   fetchPortfolioCategories: async () => {
-    if (get().portfolioCategories.length > 0) return;
+    if (get().isFetched.portfolioCategories) return;
 
     set((state) => ({
       isLoading: { ...state.isLoading, portfolioCategories: true },
@@ -163,7 +185,10 @@ export const useDataStore = create<DataState>((set, get) => ({
         method: "GET",
       });
       const data = await res.json();
-      set({ portfolioCategories: data.data || [] });
+      set((state) => ({ 
+        portfolioCategories: data.data || [],
+        isFetched: { ...state.isFetched, portfolioCategories: true }
+      }));
     } catch (error) {
       console.error("Error fetching portfolio categories:", error);
     } finally {
@@ -177,7 +202,7 @@ export const useDataStore = create<DataState>((set, get) => ({
   articleCategories: [],
   setArticleCategories: (categories) => set({ articleCategories: categories }),
   fetchArticleCategories: async () => {
-    if (get().articleCategories.length > 0) return;
+    if (get().isFetched.articleCategories) return;
 
     set((state) => ({
       isLoading: { ...state.isLoading, articleCategories: true },
@@ -188,7 +213,10 @@ export const useDataStore = create<DataState>((set, get) => ({
         method: "GET",
       });
       const data = await res.json();
-      set({ articleCategories: data.data || [] });
+      set((state) => ({ 
+        articleCategories: data.data || [],
+        isFetched: { ...state.isFetched, articleCategories: true }
+      }));
     } catch (error) {
       console.error("Error fetching article categories:", error);
     } finally {
@@ -208,6 +236,16 @@ export const useDataStore = create<DataState>((set, get) => ({
     articles: false,
   },
 
+  // ========== FETCHED FLAGS ==========
+  isFetched: {
+    techStacks: false,
+    roles: false,
+    portfolioCategories: false,
+    articleCategories: false,
+    portfolios: false,
+    articles: false,
+  },
+
   // ========== RESET ALL ==========
   resetAllData: () =>
     set({
@@ -218,6 +256,14 @@ export const useDataStore = create<DataState>((set, get) => ({
       portfolios: [],
       articles: [],
       isLoading: {
+        techStacks: false,
+        roles: false,
+        portfolioCategories: false,
+        articleCategories: false,
+        portfolios: false,
+        articles: false,
+      },
+      isFetched: {
         techStacks: false,
         roles: false,
         portfolioCategories: false,
