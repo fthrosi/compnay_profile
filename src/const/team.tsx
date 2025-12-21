@@ -1,0 +1,58 @@
+export const teamData = [
+    {
+      "id": 1,
+      "name": "Anisa Berliani Putri Salsabila",
+      "foto":"/images/member/alsa.jpg",
+      "jabatan": "Chief Executive Officer",
+      "jabatanId": 1,
+    },
+    {
+      "id": 2,
+      "name": "Anggoro Setyo Nugroho",
+      "foto":"/images/member/anggoro.jpg",
+      "jabatan": "Development Manager",
+      "jabatanId": 2,
+    },
+    {
+      "id": 3,
+      "name": "Muhammad Asri Alfajri",
+      "foto":"/images/member/anggoro.jpg",
+      "jabatan": "Operational Manager",
+      "jabatanId": 3,
+    },
+    {
+      "id": 4,
+      "name": "Fathur Rosi",
+      "foto":"/images/member/fathur-rosi.jpg",
+      "jabatan": "Full Stack Developer",
+      "jabatanId": 4,
+    },
+    {
+      "id": 5,
+      "name": "Anisa Berliani Putri Salsabila",
+      "foto":"/images/member/alsa.jpg",
+      "jabatan": "CHIEF EXECUTIVE OFFICER",
+      "jabatanId": 1,
+    },
+    {
+      "id": 6,
+      "name": "Anggoro Setyo Nugroho",
+      "foto":"/images/member/anggoro.jpg",
+      "jabatan": "Development Manager",
+      "jabatanId": 2,
+    },
+    {
+      "id": 7,
+      "name": "Muhammad Asri Alfajri",
+      "foto":"/images/member/anggoro.jpg",
+      "jabatan": "Operational Manager",
+      "jabatanId": 3,
+    },
+    {
+      "id": 8,
+      "name": "Fathur Rosi",
+      "foto":"/images/member/fathur-rosi.jpg",
+      "jabatan": "Full Stack Developer",
+      "jabatanId": 4,
+    },
+]
