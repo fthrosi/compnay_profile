@@ -28,24 +28,11 @@ export default function HomePage() {
             enhance efficiency, and transform how enterprises operate in the
             digital age.
           </p>
-<<<<<<< HEAD:src/app/page.tsx
-
-          <button className="mt-8 px-7 py-3 bg-[#1E40AF] text-white rounded-xl font-semibold hover:scale-105 transition-all flex items-center gap-2 shadow-lg">
-=======
           <button className="mt-8 px-7 py-3 bg-prtext-primary text-white rounded-xl font-semibold hover:scale-105 transition-all flex items-center gap-2 shadow-lg">
->>>>>>> 263121f264452d448cbab1fe469f3b1b5749e562:src/app/(guest)/page.tsx
             Explore Solutions →
           </button>
         </div>
 
-<<<<<<< HEAD:src/app/page.tsx
-        {/* RIGHT IMAGES (Figma Optimized) */}
-        <div className="flex-1 flex justify-center md:justify-end relative z-[2]">
-          <div className="relative w-[520px] h-[560px]">
-            {/* 🔵🟡 SHAPES BACKGROUND */}
-            <div className="absolute inset-0 z-[1]">
-              <HeroShapes />
-=======
         {/* RIGHT IMAGES */}
         <div className="flex-1 flex justify-end relative z-2">
           <div className="absolute top-32 -left-10 bg-white rounded-full p-3 shadow-lg border border-gray-200 z-3">
@@ -83,7 +70,6 @@ export default function HomePage() {
                   className="rounded-xl object-cover"
                 />
               </div>
->>>>>>> 263121f264452d448cbab1fe469f3b1b5749e562:src/app/(guest)/page.tsx
             </div>
 
             {/* Icon Globe */}
@@ -235,13 +221,10 @@ export default function HomePage() {
       <div className="container-layout mt-20">
         <CTAHero />
       </div>
-<<<<<<< HEAD:src/app/page.tsx
-=======
 
       {/* <div className="container-layout mt-12 mb-0">
         <CTASection />
       </div> */}
->>>>>>> 263121f264452d448cbab1fe469f3b1b5749e562:src/app/(guest)/page.tsx
     </main>
   );
 }
