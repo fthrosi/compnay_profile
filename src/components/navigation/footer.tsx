@@ -61,11 +61,7 @@ export default function Footer() {
           {/* Kolom kanan: daftar services */}
           <div className="flex">
             <div className="flex flex-col gap-4.5">
-<<<<<<< HEAD
               <h6 className="font-bold text-neutral-white">Services</h6>
-=======
-              <h6 className="font-bold text-white">Services</h6>
->>>>>>> 263121f264452d448cbab1fe469f3b1b5749e562
               <div className="flex gap-6 text-neutral-white lg:text-body-m text-caption">
                 <div className="flex flex-col gap-4.5">
                   <p>Web Design & Development</p>

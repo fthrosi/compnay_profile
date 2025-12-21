@@ -69,18 +69,6 @@ export default function ServicesPage() {
 
   return (
     <main className="pt-20 bg-white">
-<<<<<<< HEAD:src/app/service/page.tsx
-      {/* HERO */}
-      <section className="container-layout relative overflow-hidden py-24 text-center bg-light-primary rounded-b-[5.625rem]">
-        <div className="hidden sm:block absolute top-0 right-0 lg:w-[35rem] lg:h-[20rem] md:w-[26rem] md:h-[15rem] w-[18rem] h-[12rem] rounded-full bg-gradient-to-r from-[#FCD880] via-[#87BBD7] to-[#1E40AF] blur-[80px] rotate-[25deg] translate-x-[6rem] -translate-y-[3rem] z-0"></div>
-
-        <div className="relative flex flex-col items-center gap-6 z-10">
-          <div className="px-5 py-2 rounded-xl bg-primary text-white font-semibold text-sm md:text-base">
-            Our Services
-          </div>
-
-          <h1 className="text-h2 md:text-h1 font-extrabold text-neutral-black leading-tight text-center font-montserrat">
-=======
       {/* HERO SECTION */}
       <section className="relative overflow-hidden px-6 md:px-16 py-24 text-center bg-light-primary rounded-b-[5.625rem] flex justify-center items-center">
         {/* background gradasi */}
@@ -92,7 +80,6 @@ export default function ServicesPage() {
           </div>
 
           <h1 className="lg:text-5xl md:text-4xl text-3xl font-extrabold text-neutral-black text-center leading-tight font-montserrat">
->>>>>>> 263121f264452d448cbab1fe469f3b1b5749e562:src/app/(guest)/service/page.tsx
             <span className="text-primary">Digital Solutions</span>
             <br />
             That Drive Growth
@@ -111,11 +98,7 @@ export default function ServicesPage() {
           {services.map((service, index) => (
             <div
               key={index}
-<<<<<<< HEAD:src/app/service/page.tsx
-              className="group relative bg-white border border-[#E5E7EB] rounded-2xl shadow-sm hover:shadow-lg hover:border-primary/40 transition-all duration-300 p-8"
-=======
               className="group relative bg-white border border-[#E5E7EB] rounded-[1.25rem] shadow-sm hover:shadow-md hover:border-primary/40 transition-all duration-300 p-8 text-left"
->>>>>>> 263121f264452d448cbab1fe469f3b1b5749e562:src/app/(guest)/service/page.tsx
             >
               {/* ICON */}
               <div className="inline-flex items-center justify-center w-14 h-14 bg-[#E9F0FF] rounded-xl mb-6">
@@ -128,11 +111,7 @@ export default function ServicesPage() {
               </div>
 
               {/* TITLE */}
-<<<<<<< HEAD:src/app/service/page.tsx
-              <h3 className="text-h4 font-bold text-primary mb-3 font-montserrat">
-=======
               <h3 className="text-xl font-bold text-primary mb-3 font-montserrat">
->>>>>>> 263121f264452d448cbab1fe469f3b1b5749e562:src/app/(guest)/service/page.tsx
                 {service.title}
               </h3>
 
@@ -145,11 +124,7 @@ export default function ServicesPage() {
               <ul className="space-y-3 mb-8 text-gray-700 font-montserrat">
                 {service.features.map((item, i) => (
                   <li key={i} className="flex items-center gap-3">
-<<<<<<< HEAD:src/app/service/page.tsx
-                    <span className="flex items-center justify-center w-5 h-5 rounded-full bg-primary">
-=======
                     <span className="flex items-center justify-center w-5 h-5 rounded-full bg-primary/90">
->>>>>>> 263121f264452d448cbab1fe469f3b1b5749e562:src/app/(guest)/service/page.tsx
                       <Check className="w-3.5 h-3.5 text-white" />
                     </span>
                     <span>{item}</span>
@@ -161,11 +136,7 @@ export default function ServicesPage() {
               <div className="flex items-center">
                 <Link
                   href="#"
-<<<<<<< HEAD:src/app/service/page.tsx
-                  className="inline-flex items-center gap-2 bg-primary hover:bg-color-primary-dark text-white font-semibold px-5 py-2.5 rounded-lg transition-all"
-=======
                   className="inline-flex items-center gap-2 bg-primary hover:bg-[#17348A] text-white font-semibold px-5 py-2.5 rounded-lg transition-all"
->>>>>>> 263121f264452d448cbab1fe469f3b1b5749e562:src/app/(guest)/service/page.tsx
                 >
                   Free Consultation →
                 </Link>
