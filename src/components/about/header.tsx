@@ -2,7 +2,7 @@
 import { motion } from "motion/react";
 export default function HeaderAbout() {
   return (
-    <div className="flex flex-col gap-10 lg:gap-0 lg:h-dvh mb-10 lg:mb-0">
+    <div className="flex flex-col gap-10 lg:gap-0 lg:min-h-dvh mb-10 lg:mb-0">
       <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
