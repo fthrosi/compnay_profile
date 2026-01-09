@@ -110,26 +110,29 @@ export default function PortfolioList() {
             and meaningful impact.
           </motion.p>
         </div>
-        <motion.div
-          variants={containerVariant}
-          initial="hidden"
-          animate="show"
-          viewport={{ once: true }}
-          className="flex flex-wrap justify-center gap-4"
-        >
-          {portfolioNavigation.map((item) => (
-            <motion.div
-              variants={itemVariant}
-              key={item.id}
-              className={`px-4 font-montserrat py-2.5 rounded-[1.25rem] border border-[#CACAD1] text-caption font-semibold text-neutral-black cursor-pointer hover:bg-primary hover:text-white transition ${
-                typeFilter === item.type ? "bg-primary text-white" : ""
-              }`}
-              onClick={() => handleFilterChange(item.type)}
-            >
-              {item.title}
-            </motion.div>
-          ))}
-        </motion.div>
+        {portofolioData.length > 0 ? (
+          <motion.div
+            variants={containerVariant}
+            initial="hidden"
+            animate="show"
+            viewport={{ once: true }}
+            className="flex flex-wrap justify-center gap-4"
+          >
+            {portfolioNavigation.map((item) => (
+              <motion.div
+                variants={itemVariant}
+                key={item.id}
+                className={`px-4 font-montserrat py-2.5 rounded-[1.25rem] border border-[#CACAD1] text-caption font-semibold text-neutral-black cursor-pointer hover:bg-primary hover:text-white transition ${
+                  typeFilter === item.type ? "bg-primary text-white" : ""
+                }`}
+                onClick={() => handleFilterChange(item.type)}
+              >
+                {item.title}
+              </motion.div>
+            ))}
+          </motion.div>
+        ) : (<h1 className="text-2xl text-center text-primary font-bold py-2">Tidak ada portofolio tersedia saat ini.</h1>)}
+
         <motion.div
           variants={containerVariant}
           initial="hidden"
@@ -145,9 +148,7 @@ export default function PortfolioList() {
               key={item.id}
               onClick={() => openDetailModal(item)}
             >
-              <motion.div
-              layoutId={`portfolio-image-${item.id}`}
-              >
+              <motion.div layoutId={`portfolio-image-${item.id}`}>
                 <Image
                   src={item.thumbnail_url}
                   alt={item.name}

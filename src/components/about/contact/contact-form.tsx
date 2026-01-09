@@ -1,8 +1,12 @@
 "use client";
 
-import { motion, easeOut, stagger } from "motion/react";
+import { motion, easeOut } from "motion/react";
+import { useState, ChangeEvent } from "react";
+import { EmailRequestBody } from "@/types/email.types";
+import { toast } from "sonner";
 
 export default function ContactForm() {
+  const [isLoading, setIsLoading] = useState(false);
   const maskVariant = {
     hidden: {
       opacity: 0,
@@ -27,6 +31,46 @@ export default function ContactForm() {
   const inputVariant = {
     hidden: { opacity: 0, y: 50 },
     show: { opacity: 1, y: 0 },
+  };
+
+  const [formData, setFormData] = useState<EmailRequestBody>({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
+  };
+  const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      await fetch("/api/email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      toast.success("Pesan berhasil dikirim!");
+      setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          message: "",
+      });
+    } catch (err) {
+      toast.error("Gagal mengirim pesan. Silakan coba lagi.");
+    } finally {
+      setIsLoading(false);
+    }
   };
   return (
     <div className="w-full md:w-1/2 flex flex-col lg:gap-8 gap-4 md:gap-6 font-montserrat">
@@ -56,6 +100,7 @@ export default function ContactForm() {
         whileInView="show"
         viewport={{ once: true }}
         action=""
+        onSubmit={handleSubmit}
         className="flex flex-col lg:gap-8 gap-4 md:gap-6"
       >
         <motion.div
@@ -74,6 +119,7 @@ export default function ContactForm() {
           <input
             type="text"
             id="name"
+            onChange={handleChange}
             className="border bg-neutral-white border-neutral-200 rounded-xl lg:rounded-[1.25rem] p-2 lg:p-4 text-neutral-500 lg:text-body-l md:text-body-m text-caption"
             placeholder="Enter your name"
           />
@@ -95,6 +141,7 @@ export default function ContactForm() {
             <input
               type="email"
               id="email"
+              onChange={handleChange}
               className="border bg-neutral-white border-neutral-200 rounded-xl lg:rounded-[1.25rem] p-2 lg:p-4 text-neutral-500 lg:text-body-l md:text-body-m text-caption"
               placeholder="Enter your email"
             />
@@ -109,6 +156,7 @@ export default function ContactForm() {
             <input
               type="tel"
               id="phone"
+              onChange={handleChange}
               className="border bg-neutral-white border-neutral-200 rounded-xl lg:rounded-[1.25rem] p-2 lg:p-4 text-neutral-500 lg:text-body-l md:text-body-m text-caption"
               placeholder="Enter your phone number"
             />
@@ -130,6 +178,7 @@ export default function ContactForm() {
           <textarea
             name="message"
             id="message"
+            onChange={handleChange}
             className="border aspect-26/7 bg-neutral-white border-neutral-200 rounded-xl lg:rounded-[1.25rem] p-2 lg:p-4 text-neutral-500 lg:text-body-l md:text-body-m text-caption"
             placeholder="Write down your message here..."
           ></textarea>
@@ -140,8 +189,9 @@ export default function ContactForm() {
           viewport={{ once: true }}
           type="submit"
           className="bg-primary hover:cursor-pointer text-white py-3 px-4 rounded-[0.625rem] lg:text-body-l md:text-body-m text-caption font-bold"
+          disabled={isLoading}
         >
-          Submit
+          {isLoading ? "Sending..." : "Send Message"}
         </motion.button>
       </motion.form>
     </div>

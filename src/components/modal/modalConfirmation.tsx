@@ -30,11 +30,11 @@ isLoading = false,
          <p className="text-body-l text-center text-neutral-black">{message}</p>
        </div>
 
-       <div className="w-full flex gap-3 mt-5">
-         <button onClick={onClose} className="bg-red-600 flex-1 py-2 px-4 rounded-lg" disabled={isLoading}>
+       <div className="w-full flex gap-3 mt-5 ">
+         <button onClick={onClose} className="bg-red-600 flex-1 py-2 px-4 rounded-lg text-white" disabled={isLoading}>
            Tidak
          </button>
-         <button onClick={onConfirm} className="bg-green-600 flex-1 py-2 px-4 rounded-lg" disabled={isLoading}>
+         <button onClick={onConfirm} className="bg-green-600 flex-1 py-2 px-4 rounded-lg text-white" disabled={isLoading}>
               {isLoading ? 'Memproses...' : 'Ya'}
          </button>
        </div>
