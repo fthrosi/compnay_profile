@@ -9,6 +9,7 @@ import { useUIStore } from "@/store/useUiStore";
 import ArticleDetailModal from "../modal/modalArticle/modalDetail";
 import { useDataStore } from "@/store/useDataStore";
 import { motion, easeOut } from "motion/react";
+import { ar } from "zod/v4/locales";
 
 export default function RecentArticle() {
   const open = useUIStore((state) => state.open);
@@ -89,29 +90,33 @@ export default function RecentArticle() {
       ease: easeOut,
     },
   };
+  console.log("Articles:", articles);
   return (
     <>
       <div className="container-layout flex flex-col items-center gap-16 mb-40">
-        <motion.div
-          variants={containerVariant}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="flex flex-wrap justify-center gap-4"
-        >
-          {insightNavigation.map((item) => (
-            <motion.div
-              variants={itemVariant}
-              key={item.id}
-              className={`px-4 font-montserrat py-2.5 rounded-[1.25rem] border border-[#CACAD1] text-caption font-semibold text-neutral-black cursor-pointer hover:bg-primary hover:text-white transition ${
-                typeFilter === item.title ? "bg-primary text-white" : ""
-              }`}
-              onClick={() => handleFilterChange(item.type)}
-            >
-              {item.title}
-            </motion.div>
-          ))}
-        </motion.div>
+        {articles.length > 0 && (
+          <motion.div
+            variants={containerVariant}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="flex flex-wrap justify-center gap-4"
+          >
+            {insightNavigation.map((item) => (
+              <motion.div
+                variants={itemVariant}
+                key={item.id}
+                className={`px-4 font-montserrat py-2.5 rounded-[1.25rem] border border-[#CACAD1] text-caption font-semibold text-neutral-black cursor-pointer hover:bg-primary hover:text-white transition ${
+                  typeFilter === item.title ? "bg-primary text-white" : ""
+                }`}
+                onClick={() => handleFilterChange(item.type)}
+              >
+                {item.title}
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
+
         <motion.div
           variants={containerVariant}
           initial="hidden"
@@ -132,7 +137,7 @@ export default function RecentArticle() {
                   alt="Article Image"
                   width={372}
                   height={220}
-                  className="lg:w-auto lg:h-auto w-full rounded-[1.25rem]"
+                  className="lg:w-full lg:h-auto w-full rounded-[1.25rem]"
                 />
               </motion.div>
               <div className="p-2.5 rounded-[0.625rem] bg-neutral-300 w-fit flex items-center justify-center">
@@ -226,7 +231,7 @@ export default function RecentArticle() {
             <motion.button
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5,delay: 0.4 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
               viewport={{ once: true }}
               className="hover:cursor-pointer lg:py-3 lg:px-6 p-3 bg-primary text-white rounded-[1.25rem] text-caption lg:text-body-l font-bold"
             >

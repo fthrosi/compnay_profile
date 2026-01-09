@@ -9,7 +9,7 @@ export default function VisionMision() {
   const isInView = useInView(scrollRef,{once:true});
   
   return (
-    <div className="container-layout lg:min-h-dvh flex flex-col xl:justify-center gap-4 xl:gap-6 mb-10 lg:mb-0">
+    <div className="container-layout lg:min-h-dvh flex flex-col xl:justify-center gap-4 xl:gap-6 mb-10 lg:mb-0 py-16">
       <div className="flex flex-col md:flex-row items-center md:items-stretch gap-4 xl:gap-6">
         <motion.div
         initial={{ x: -50, opacity: 0 }}

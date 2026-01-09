@@ -13,7 +13,7 @@
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.1",
     "@hookform/resolvers": "^5.2.2",
-    "@prisma/client": "^7.2.0",
+    "@prisma/client": "^6.19.1",
     "@tiptap/extension-text-align": "^3.14.0",
     "bcrypt": "^6.0.0",
     "cloudinary": "^2.8.0",
@@ -30,6 +30,7 @@
     "react-hook-form": "^7.69.0",
     "react-quill-new": "^3.7.0",
     "react-slick": "^0.31.0",
+    "resend": "^6.7.0",
     "slick-carousel": "^1.8.1",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.4.0",
@@ -42,7 +43,7 @@
     "@types/node": "^25",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "prisma": "^7.2.0",
+    "prisma": "^6.19.1",
     "tailwindcss": "^4",
     "ts-node": "^10.9.2",
     "typescript": "^5"
