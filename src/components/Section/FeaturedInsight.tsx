@@ -10,19 +10,19 @@ const FeaturedInsight: React.FC = () => {
       img: "/images/people.png",
       title: "Generative AI: From Creative Tools to Innovation Machines",
       desc: "Generative artificial intelligence now not only produces text or images, but also assists in scientific research, product design, and even music. This article reviews its impact on the creative industry and the ethics of its use..",
-      link: "#",
+      link: "/insight",
     },
     {
-      img: "/images/insight2.png",
+      img: "/images/team.png",
       title: "Digital Transformation Towards Operational Efficiency",
       desc: "Learn how digital transformation can improve business efficiency through the adoption of smart technologies and cross-team collaboration.",
-      link: "#",
+      link: "/insight",
     },
     {
-      img: "/images/insight3.png",
+      img: "/images/team.png",
       title: "Cloud Solutions for Modern Business Acceleration",
       desc: "Discover how cloud solutions help companies innovate faster, reduce operating costs, and improve system scalability.",
-      link: "#",
+      link: "/insight",
     },
   ];
 
@@ -50,17 +50,17 @@ const FeaturedInsight: React.FC = () => {
 
       {/* Main Content */}
       <div className="relative z-10 flex flex-col items-center justify-center text-center h-full px-6 md:px-10 text-white mx-auto max-w-5xl">
-        <h1 className="text-3xl md:text-5xl font-extrabold leading-snug mb-4">
+        <h1 className="text-xl sm:text-3xl md:text-5xl font-extrabold leading-snug mb-4">
           {currentInsight.title}
         </h1>
 
-        <p className="text-base md:text-lg text-gray-200 max-w-3xl mb-8">
+        <p className="text-xs sm:text-sm md:text-lg text-gray-200 max-w-3xl mb-8">
           {currentInsight.desc}
         </p>
 
         <a
           href={currentInsight.link}
-          className="flex items-center gap-2 bg-[#0044CC] hover:bg-[#0033A0] text-white font-semibold px-6 py-3 rounded-lg transition"
+          className="flex items-center gap-2 bg-[#0044CC] hover:bg-[#0033A0] text-white font-semibold text-xs sm:text-sm p-2 lg:px-6 lg:py-3 rounded-lg transition"
         >
           Read Article
           <BookOpen className="w-5 h-5 text-white" />

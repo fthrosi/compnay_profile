@@ -9,17 +9,44 @@ import BurgerIcon from "@/icons/burger-icon";
 import XIcon from "@/icons/x-icon";
 import { useState } from "react";
 import { motion } from "motion/react";
+import { useRef,useEffect } from "react";
+import { useNavbarStore } from "@/store/navbarHeight";
 
 export default function Navbar() {
+  const ref = useRef<HTMLElement>(null);
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  const setNavbarHeight = useNavbarStore((state) => state.setNavbarHeight);
+  const getNavbarHeight = () => {
+    const height = ref.current ? ref.current.offsetHeight : 0;
+    setNavbarHeight(height);
+  };
+
+  useEffect(() => {
+    getNavbarHeight();
+  }, [scrolled]);
+  useEffect(() => {
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      if (offset > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <motion.div 
+    <motion.header 
     initial={{ y: -100, opacity: 0 }}
     animate={{ y: 0, opacity: 1 }}
     transition={{ duration: 0.5 }}
     viewport={{ once: true }}
+    ref={ref}
     className="w-full fixed top-0 left-0 z-50 bg-neutral-white">
       {/* Navbar utama */}
       <div className="container-layout flex items-center justify-between md:h-[7.438rem] h-20">
@@ -113,6 +140,6 @@ export default function Navbar() {
           </Link>
         </div>
       </div>
-    </motion.div>
+    </motion.header>
   );
 }

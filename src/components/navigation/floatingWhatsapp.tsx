@@ -45,10 +45,10 @@ export default function FloatingWhatsapp() {
         href="https://wa.me/6285869887731"
         className={`${
           isStoped ? "absolute" : "fixed bottom-8 "
-        } right-5 2xl:right-50 z-100 left-auto  lg:size-15 size-10 md:size-13 bg-light-primary p-2.5 rounded-full`}
+        } right-5 2xl:right-50 z-100 left-auto  lg:size-15 size-13 md:size-13 bg-light-primary p-2.5 rounded-full`}
         style={isStoped ? { top: topPosition } : {}}
       >
-        <WhatsAppIcon className="lg:size-10 md:size-8 size-5 shrink-0 text-primary" />
+        <WhatsAppIcon className="lg:size-10 md:size-8 size-8 shrink-0 text-primary" />
       </Link>
     </motion.div>
   );

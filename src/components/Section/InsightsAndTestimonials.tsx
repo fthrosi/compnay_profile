@@ -1,14 +1,49 @@
 "use client";
 import Image from "next/image";
+import { motion, easeOut } from "motion/react";
 
 export default function InsightsAndPartners() {
-  // ==== DATA TESTIMONIAL ====
+  const titleVarian = {
+    hidden: { opacity: 0, clipPath: "inset(0% 100% 0% 0%)" },
+    show: {
+      opacity: 1,
+      clipPath: "inset(0% 0% 0% 0%)",
+      transition: { duration: 1, ease: easeOut },
+    },
+  };
+  const containerVariant = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+        staggerChildren: 0.2,
+      },
+    },
+  };
+  const subTitleVariant = {
+    hidden: { opacity: 0, y: 50 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, delay: 0.2 },
+    },
+  };
+  const cardVariant = {
+    hidden: { opacity: 0, scale: 0.8 },
+    show: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.5 },
+      ease: easeOut,
+    },
+  };
   const testimonials = [
     {
       rating: "5/5",
       text: "We were impressed by Talenta Digital Solution’s attention to detail and responsiveness throughout the project. The digital product they built has received positive feedback from our users.",
       name: "Jane Cooper",
-      avatar: "/images/jane.png",
+      avatar: "/images/woman.png",
     },
     {
       rating: "4.9/5",
@@ -29,21 +64,35 @@ export default function InsightsAndPartners() {
       <div className="container mx-auto px-6 md:px-12">
         <div>
           <div className="grid md:grid-cols-2 gap-10 items-start mb-12">
-            {/* Kiri */}
-            <div>
-              <h2 className="text-4xl md:text-5xl font-extrabold text-[#0044CC] leading-tight mb-4">
+            <motion.div
+              variants={containerVariant}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+            >
+              <motion.h2
+                variants={titleVarian}
+                className="text-4xl md:text-5xl font-extrabold text-[#0044CC] leading-tight mb-4"
+              >
                 Trusted by Our <br /> Partners
-              </h2>
-              <p className="text-gray-600 max-w-md">
+              </motion.h2>
+              <motion.p
+                variants={subTitleVariant}
+                className="text-gray-600 max-w-md"
+              >
                 Read the experiences of our distinguished clients who entrusted
                 Talenta Digital Solution to deliver innovative and impactful
                 digital solutions.
-              </p>
-            </div>
+              </motion.p>
+            </motion.div>
 
-            {/* Card Utama */}
-            <div className="bg-[#E8F0FF] p-8 rounded-2xl shadow-sm relative overflow-hidden">
-              {/* Rating */}
+            <motion.div
+              variants={cardVariant}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              className="bg-[#E8F0FF] p-8 rounded-2xl shadow-sm relative overflow-hidden"
+            >
               <div className="flex items-center mb-4">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -64,38 +113,41 @@ export default function InsightsAndPartners() {
                 </span>
               </div>
 
-              {/* Text */}
               <p className="text-gray-700 mb-14">{testimonials[0].text}</p>
-
-              {/* Name */}
-              <span className="font-medium text-gray-800">
-                {testimonials[0].name}
-              </span>
-
-              {/* Foto Profil */}
-              <div className="absolute bottom-6 left-6 w-14 h-14 rounded-full overflow-hidden shadow-md">
-                <Image
-                  src={testimonials[0].avatar}
-                  alt={testimonials[0].name}
-                  fill
-                  className="object-cover"
-                />
+              <div className="flex items-center gap-2">
+                <div className="bottom-6 left-6 w-14 h-14 rounded-full overflow-hidden shadow-md">
+                  <Image
+                    src={testimonials[0].avatar}
+                    alt={testimonials[0].name}
+                    width={56}
+                    height={56}
+                    className="object-cover w-14 h-14"
+                  />
+                </div>
+                <span className="font-medium text-gray-800">
+                  {testimonials[0].name}
+                </span>
               </div>
 
               <div className="absolute bottom-4 right-6 text-[#0044CC]/10 text-8xl">
                 &rdquo;
               </div>
-            </div>
+            </motion.div>
           </div>
 
-          {/* Dua card di bawah */}
-          <div className="grid md:grid-cols-2 gap-8 mt-4">
+          <motion.div
+            variants={containerVariant}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="grid md:grid-cols-2 gap-8 mt-4"
+          >
             {testimonials.slice(1).map((item, index) => (
-              <div
+              <motion.div
+                variants={cardVariant}
                 key={index}
                 className="bg-[#E8F0FF] p-8 rounded-2xl shadow-sm relative overflow-hidden"
               >
-                {/* Rating */}
                 <div className="flex items-center mb-4">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -116,28 +168,28 @@ export default function InsightsAndPartners() {
                   </span>
                 </div>
 
-                {/* Text */}
                 <p className="text-gray-700 mb-14">{item.text}</p>
 
-                {/* Name */}
-                <span className="font-medium text-gray-800">{item.name}</span>
+                <div className="flex gap-2 items-center">
+                  <div className="bottom-6 left-6 w-14 h-14 rounded-full overflow-hidden shadow-md">
+                    <Image
+                      src={item.avatar}
+                      alt={item.name}
+                      height={56}
+                      width={56}
+                      className="object-cover w-full h-full"
+                    />
+                  </div>
 
-                {/* Foto Profil */}
-                <div className="absolute bottom-6 left-6 w-14 h-14 rounded-full overflow-hidden shadow-md">
-                  <Image
-                    src={item.avatar}
-                    alt={item.name}
-                    fill
-                    className="object-cover"
-                  />
+                  <span className="font-medium text-gray-800">{item.name}</span>
                 </div>
 
                 <div className="absolute bottom-4 right-6 text-[#0044CC]/10 text-8xl font-serif select-none">
                   &rdquo;
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

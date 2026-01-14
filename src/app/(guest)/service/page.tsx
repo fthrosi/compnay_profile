@@ -1,6 +1,8 @@
+'use client';
 import Image from "next/image";
 import Link from "next/link";
 import { Check } from "lucide-react";
+import { motion, easeOut } from "motion/react";
 
 export default function ServicesPage() {
   const services = [
@@ -65,77 +67,125 @@ export default function ServicesPage() {
       features: ["Workflow Automation", "Data Centralization", "Integration"],
     },
   ];
-
-
+  const containerVariant = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+        staggerChildren: 0.2,
+      },
+    },
+  };
+  const cardVariant = {
+    hidden: { opacity: 0, scale: 0.8 },
+    show: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.5 },
+      ease: easeOut,
+    },
+  };
   return (
     <main className="pt-20 bg-white">
       {/* HERO SECTION */}
-      <section className="relative overflow-hidden px-6 md:px-16 py-24 text-center bg-light-primary rounded-b-[5.625rem] flex justify-center items-center">
+      <motion.section
+        initial={{ opacity: 0, scale: 0.8 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}
+        className="relative overflow-hidden px-6 md:px-16 py-24 text-center bg-light-primary rounded-b-[5.625rem] flex justify-center items-center"
+      >
         {/* background gradasi */}
         <div className="hidden sm:block absolute top-0 right-0 lg:w-152 lg:h-88 md:w-md md:h-64 w-[20rem] h-48 rounded-full bg-linear-to-r from-[#FCD880] via-[#87BBD7] to-primary blur-[80px] rotate-25 translate-x-32 -translate-y-16 z-0"></div>
 
         <div className="relative flex flex-col justify-center items-center gap-7.5 z-10">
-          <div className="px-5 py-2 rounded-[0.938rem] bg-primary text-white font-semibold text-sm md:text-base">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="px-5 py-2 rounded-[0.938rem] bg-primary text-white font-semibold text-sm md:text-base"
+          >
             Our Services
-          </div>
+          </motion.div>
 
-          <h1 className="lg:text-5xl md:text-4xl text-3xl font-extrabold text-neutral-black text-center leading-tight font-montserrat">
+          <motion.h1
+            initial={{ opacity: 0, scale: 0.5 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="lg:text-5xl md:text-4xl text-3xl font-extrabold text-neutral-black text-center leading-tight font-montserrat"
+          >
             <span className="text-primary">Digital Solutions</span>
             <br />
             That Drive Growth
-          </h1>
+          </motion.h1>
 
-          <p className="text-gray-700 max-w-2xl text-base md:text-lg font-montserrat">
+          <motion.p
+            initial={{ opacity: 0, scale: 0.5 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="text-gray-700 max-w-2xl text-base md:text-lg font-montserrat"
+          >
             From concept to launch, we deliver services designed to scale your
             business forward.
-          </p>
+          </motion.p>
         </div>
-      </section>
+      </motion.section>
 
       {/* SERVICES GRID */}
       <section className="py-20">
-        <div className="container-layout grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        <motion.div
+        variants={containerVariant}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="container-layout grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {services.map((service, index) => (
-            <div
+            <motion.div
+              variants={cardVariant}
               key={index}
-              className="group relative bg-white border border-[#E5E7EB] rounded-[1.25rem] shadow-sm hover:shadow-md hover:border-primary/40 transition-all duration-300 p-8 text-left"
+              className="group flex flex-col justify-between relative bg-white border border-[#E5E7EB] rounded-[1.25rem] shadow-sm hover:shadow-md hover:border-primary/40 transition-all duration-300 p-8 text-left"
             >
-              {/* ICON */}
-              <div className="inline-flex items-center justify-center w-14 h-14 bg-[#E9F0FF] rounded-xl mb-6">
-                <Image
-                  src={service.icon}
-                  alt={service.title}
-                  width={32}
-                  height={32}
-                />
+              <div>
+                {/* ICON */}
+                <div className="inline-flex items-center justify-center w-14 h-14 bg-[#E9F0FF] rounded-xl mb-6">
+                  <Image
+                    src={service.icon}
+                    alt={service.title}
+                    width={32}
+                    height={32}
+                  />
+                </div>
+
+                {/* TITLE */}
+                <h3 className="text-xl font-bold text-primary mb-3 font-montserrat">
+                  {service.title}
+                </h3>
+
+                {/* DESCRIPTION */}
+                <p className="text-gray-600 mb-6 font-montserrat text-body-m md:text-body-l">
+                  {service.desc}
+                </p>
+
+                {/* FEATURES */}
+                <ul className="space-y-3 mb-8 text-gray-700 font-montserrat">
+                  {service.features.map((item, i) => (
+                    <li key={i} className="flex items-center gap-3">
+                      <span className="flex items-center justify-center w-5 h-5 rounded-full bg-primary/90">
+                        <Check className="w-3.5 h-3.5 text-white" />
+                      </span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-
-              {/* TITLE */}
-              <h3 className="text-xl font-bold text-primary mb-3 font-montserrat">
-                {service.title}
-              </h3>
-
-              {/* DESCRIPTION */}
-              <p className="text-gray-600 mb-6 font-montserrat text-body-m md:text-body-l">
-                {service.desc}
-              </p>
-
-              {/* FEATURES */}
-              <ul className="space-y-3 mb-8 text-gray-700 font-montserrat">
-                {service.features.map((item, i) => (
-                  <li key={i} className="flex items-center gap-3">
-                    <span className="flex items-center justify-center w-5 h-5 rounded-full bg-primary/90">
-                      <Check className="w-3.5 h-3.5 text-white" />
-                    </span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-
               {/* BUTTONS */}
               <div className="flex items-center">
                 <Link
-                  href="#"
+                  href="/about#contact"
                   className="inline-flex items-center gap-2 bg-primary hover:bg-[#17348A] text-white font-semibold px-5 py-2.5 rounded-lg transition-all"
                 >
                   Free Consultation →
@@ -144,9 +194,9 @@ export default function ServicesPage() {
                   i
                 </button>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </section>
     </main>
   );
