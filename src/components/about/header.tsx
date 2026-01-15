@@ -2,7 +2,7 @@
 import { motion } from "motion/react";
 export default function HeaderAbout() {
   return (
-    <div className="flex flex-col gap-10 lg:gap-0 lg:min-h-dvh mb-10 lg:mb-0">
+    <div className="flex flex-col gap-10 lg:gap-10 lg:min-h-dvh mb-10 lg:mb-0">
       <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
@@ -41,7 +41,7 @@ export default function HeaderAbout() {
           <div className="hidden sm:block absolute inset-0 lg:w-81.5 lg:h-[19.813rem] size-50 md:size-70 rounded-full bg-linear-to-r from-[#FCD880] via-[#87BBD7] to-primary blur-[70px] -rotate-70 lg:-top-40 lg:left-90 -top-40 left-60 z-1"></div>
         </div>
       </motion.div>
-      <div className="flex-1 flex flex-col md:flex-row container-layout w-full md:items-center gap-4 md:gap-0 xl:gap-6">
+      <div className="flex-1 flex flex-col md:flex-row container-layout w-full md:items-center gap-4 xl:gap-6">
         <motion.div
         initial={{ x: -50, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
@@ -59,7 +59,7 @@ export default function HeaderAbout() {
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
         className="md:w-1/2">
-          <p className="text-neutral-black xl:text-body-l lg:text-body-m text-caption xl:w-156 font-montserrat text-center md:text-left">
+          <p className="text-neutral-black xl:text-body-l lg:text-body-m text-caption font-montserrat text-center md:text-left">
             PT Talenta Digital Solutions was founded in 2024 with a vision to
             become a trusted partner in the development of innovative and
             high-quality software. Starting as a small team of technology
