@@ -1,15 +1,39 @@
 "use client";
 import useEmblaCarousel from "embla-carousel-react";
 import AutoScroll from "embla-carousel-auto-scroll";
-import { teamData } from "@/const/team";
 import type { TeamMember } from "@/types/team.type";
 import { motion } from "motion/react";
+import { useState,useEffect } from "react";
 
 export default function TeamCarousel() {
+  const [teams, setTeams] = useState<TeamMember[]>([]);
+
+  const fetchTeamData = async () => {
+    try {
+      const response = await fetch('/api/team',{
+        method: 'GET',
+      });
+      const data = await response.json();
+      if(data.data.length < 6){
+        const doubleData = data.data.map((item: TeamMember) => ({
+          ...item,
+          id: item.id + data.data.length
+        }));
+        setTeams([...data.data, ...doubleData]);
+      }else {
+        setTeams(data.data);
+      }
+    } catch (error) {
+      console.error('Error fetching team data:', error);
+    }
+  }
+  useEffect(() => {
+    fetchTeamData();
+  }, []);
   const [emblaRef] = useEmblaCarousel({ loop: true }, [
     AutoScroll({ speed: 1, stopOnInteraction: false }),
   ]);
-  const lastId = teamData[teamData.length - 1].id;
+  const lastId = teams[teams.length - 1]?.id;
   const containerCarousel = {
     hidden: { opacity: 0 },
     show: {
@@ -33,7 +57,7 @@ export default function TeamCarousel() {
         viewport={{ once: true }}
         className="flex gap-6"
       >
-        {teamData.map((member: TeamMember) => (
+        {teams.map((member: TeamMember) => (
           <motion.div
             variants={cardVariant}
             key={member.id}
