@@ -95,35 +95,35 @@ export default function ArticleDetailModal({
             </div>
 
             {/* Article Content */}
-            <div className="prose prose-sm max-w-none">
+            <div className="prose prose-sm max-w-none overflow-hidden">
               <div
-                className="text-slate-700 leading-relaxed space-y-4"
+                className="text-slate-700 leading-relaxed space-y-4 wrap-break-word overflow-wrap-anywhere"
                 dangerouslySetInnerHTML={{
                   __html: article.content
                     .replace(
                       /<h2>/g,
-                      '<h2 class="text-xl font-bold text-slate-900 mt-6 mb-3">'
+                      '<h2 class="text-xl font-bold text-slate-900 mt-6 mb-3 wrap-break-word">'
                     )
                     .replace(
                       /<h3>/g,
-                      '<h3 class="text-lg font-semibold text-slate-800 mt-4 mb-2">'
+                      '<h3 class="text-lg font-semibold text-slate-800 mt-4 mb-2 wrap-break-word">'
                     )
                     .replace(
                       /<p>/g,
-                      '<p class="text-slate-700 leading-relaxed">'
+                      '<p class="text-slate-700 leading-relaxed wrap-break-word">'
                     )
                     .replace(
                       /<ul>/g,
-                      '<ul class="list-disc list-inside space-y-2 text-slate-700 ml-4">'
+                      '<ul class="list-disc list-inside space-y-2 text-slate-700 ml-4 wrap-break-word">'
                     )
-                    .replace(/<li>/g, '<li class="text-slate-700">')
+                    .replace(/<li>/g, '<li class="text-slate-700 wrap-break-word">')
                     .replace(
                       /<ol>/g,
-                      '<ol class="list-decimal list-inside space-y-2 text-slate-700 ml-4">'
+                      '<ol class="list-decimal list-inside space-y-2 text-slate-700 ml-4 wrap-break-word">'
                     )
                     .replace(
                       /<blockquote>/g,
-                      '<blockquote class="border-l-4 border-blue-500 pl-4 italic text-slate-600 my-4">'
+                      '<blockquote class="border-l-4 border-blue-500 pl-4 italic text-slate-600 my-4 wrap-break-word">'
                     ),
                 }}
               />
