@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import prisma from "@/libs/db";
 import { z } from "zod";
 import { teamApiSchema } from "@/schema/teamSchema";
-import cloudinary from "@/libs/cloudinary";  
+import cloudinary from "@/libs/cloudinary";
 import { fileToBuffer } from "@/libs/file";
 export async function GET() {
   const team = await prisma.team.findMany({
@@ -34,61 +34,84 @@ export async function POST(req: Request) {
       name: body.get("name"),
       role_id: Number(body.get("role_id")),
       image: body.get("image"),
-    }
+    };
     const validatedData = teamApiSchema.parse(rawData);
-    const buffer = validatedData.image ? await fileToBuffer(validatedData.image as File) : null;
+    const buffer = validatedData.image
+      ? await fileToBuffer(validatedData.image as File)
+      : null;
 
-    const uploadResult : any = await new Promise((resolve, reject) => {
-      cloudinary.uploader.upload_stream({
-        folder: "team_members",
-        public_id: `${Date.now()}_${validatedData.name.replace(/\s+/g, "_")}`,
-        resource_type: "image",
-      }, (error, result) => {
-        if (error) return reject(error);
-        resolve(result);
-      }).end(buffer);
-    }) 
-
+    const uploadResult: any = await new Promise((resolve, reject) => {
+      cloudinary.uploader
+        .upload_stream(
+          {
+            folder: "team_members",
+            public_id: `${Date.now()}_${validatedData.name.replace(
+              /\s+/g,
+              "_"
+            )}`,
+            resource_type: "image",
+          },
+          (error, result) => {
+            if (error) return reject(error);
+            resolve(result);
+          }
+        )
+        .end(buffer);
+    });
 
     const newTeamMember = await prisma.team.create({
-        data: {
-          name: validatedData.name,
-          role_id: validatedData.role_id,
-          image_url: uploadResult.secure_url,
-          image_id: uploadResult.public_id,
-        },
-        include:{
-            role: true
-        }
+      data: {
+        name: validatedData.name,
+        role_id: validatedData.role_id,
+        image_url: uploadResult.secure_url,
+        image_id: uploadResult.public_id,
+      },
+      include: {
+        role: true,
+      },
     });
     return NextResponse.json({
-        success: true,
-        code: 201,
-        message: "Team member created successfully",
-        data: {
-            id: newTeamMember.id,
-            name: newTeamMember.name,
-            foto: newTeamMember.image_url,
-            jabatan: newTeamMember.role.name,
-        }
+      success: true,
+      code: 201,
+      message: "Team member created successfully",
+      data: {
+        id: newTeamMember.id,
+        name: newTeamMember.name,
+        foto: newTeamMember.image_url,
+        jabatan: newTeamMember.role.name,
+      },
     });
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        {
-          success: false,
-          code: 400,
-          message: "Validation error",
-          errors: error.issues,
-        },
-        { status: 400 }
-      );
-    }
+  } catch (error : any) {
+    // if (error instanceof z.ZodError) {
+    //   return NextResponse.json(
+    //     {
+    //       success: false,
+    //       code: 400,
+    //       message: "Validation error",
+    //       errors: error.issues,
+    //     },
+    //     { status: 400 }
+    //   );
+    // }
+    // return NextResponse.json(
+    //   {
+    //     success: false,
+    //     code: 500,
+    //     message: "Internal server error",
+    //   },
+    //   { status: 500 }
+    // );
+    console.error("UPLOAD ARTICLE ERROR");
+    console.error(error);
+    console.error("error name:", error?.name);
+    console.error("error message:", error?.message);
+    console.error("error stack:", error?.stack);
+
     return NextResponse.json(
       {
         success: false,
         code: 500,
-        message: "Internal server error",
+        message: error?.message || "Internal server error",
       },
       { status: 500 }
     );
