@@ -82,36 +82,22 @@ export async function POST(req: Request) {
       },
     });
   } catch (error : any) {
-    // if (error instanceof z.ZodError) {
-    //   return NextResponse.json(
-    //     {
-    //       success: false,
-    //       code: 400,
-    //       message: "Validation error",
-    //       errors: error.issues,
-    //     },
-    //     { status: 400 }
-    //   );
-    // }
-    // return NextResponse.json(
-    //   {
-    //     success: false,
-    //     code: 500,
-    //     message: "Internal server error",
-    //   },
-    //   { status: 500 }
-    // );
-    console.error("UPLOAD ARTICLE ERROR");
-    console.error(error);
-    console.error("error name:", error?.name);
-    console.error("error message:", error?.message);
-    console.error("error stack:", error?.stack);
-
+    if (error instanceof z.ZodError) {
+      return NextResponse.json(
+        {
+          success: false,
+          code: 400,
+          message: "Validation error",
+          errors: error.issues,
+        },
+        { status: 400 }
+      );
+    }
     return NextResponse.json(
       {
         success: false,
         code: 500,
-        message: error?.message || "Internal server error",
+        message: "Internal server error",
       },
       { status: 500 }
     );

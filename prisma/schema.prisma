@@ -40,7 +40,7 @@ model Role {
 
 model Team {
   id                 Int              @id @default(autoincrement())
-  name               String           @db.VarChar(15)
+  name               String           @db.VarChar(255)
   role_id            Int
   image_url          String           @db.VarChar(255)
   image_id           String           @db.VarChar(255)
