@@ -1,0 +1,14 @@
+services:
+  talenta-project:
+    build: ./COMPANY_PROFILE
+    container_name: talenta-project
+    restart: always
+    env_file:
+     - ./COMPANY_PROFILE/.env
+    ports:
+     - "127.0.0.1:3012:3000"
+    networks:
+     - project-network
+networks:
+  project-network:
+    external: true
