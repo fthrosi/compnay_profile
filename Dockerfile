@@ -13,6 +13,7 @@ COPY prisma ./prisma/
 RUN npm ci
 
 COPY . .
+ENV DATABASE_URL="mysql://user:password@localhost:3306/dummy"
 RUN npx prisma generate
 RUN npm run build
 
